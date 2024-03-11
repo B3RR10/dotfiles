@@ -1,0 +1,16 @@
+{{ if (lookPath "lazygit" | not) }}
+#!/bin/bash
+
+    {{ if eq .chezmoi.os "darwin" }}
+brew install lazygit
+    {{ else if .chezmoi.os "linux" }}
+URL="https://github.com/jesseduffield/lazygit/releases/latest/download"
+VERSION={{ (gitHubLatestRelease "jesseduffield/lazygit").TagName | replaceAllRegex "v" "" }}
+
+        {{ if eq .chezmoi.arch "amd64" }}
+curl -L "$URL/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" | {{ if ne .chezmoi.uid "0" }}sudo {{ end -}}tar -xvz -C "$/usr/local/bin" lazygit
+        {{ else if eq .chezmoi.arch "arm64" }}
+curl -L "$URL/lazygit_${LAZYGIT_VERSION}_Linux_arm64.tar.gz" | {{ if ne .chezmoi.uid "0" }}sudo {{ end -}}tar -xvz -C "$/usr/local/bin" lazygit
+        {{ end }}
+    {{ end }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{- if (lookPath "dotnet" | not) -}}
+#!/bin/bash
+
+    {{- if eq .chezmoi.os "darwin" -}}
+brew tap isen-ng/dotnet-sdk-versions
+brew install --cask dotnet-sdk6-0-400 dotnet-sdk7-0-400 dotnet-sdk8-0-200
+    {{- else if eq .chezmoi.os "linux" }}
+curl -L https://dot.net/v1/dotnet-install.sh | bash -s -- --channel LTS
+curl -L https://dot.net/v1/dotnet-install.sh | bash -s -- --channel STS
+curl -L https://aka.ms/install-artifacts-credprovider.sh | bash
+
+"$HOME/.dotnet/dotnet" tool install --global dotnet-ef
+    {{- end }}
+{{- end }}
