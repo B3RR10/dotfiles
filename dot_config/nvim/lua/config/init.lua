@@ -1,0 +1,20 @@
+return {
+  pde = {
+    ansible = true,
+    csharp = true,
+    docker = true,
+    fsharp = true,
+    http = true,
+    go = true,
+    lua = true,
+    md = true,
+    python = true,
+    rust = true,
+    sh = true,
+    terraform = true,
+    tex = true,
+    toml = true,
+    vim = true,
+    web = true,
+  },
+}

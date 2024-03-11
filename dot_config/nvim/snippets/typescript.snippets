@@ -1,0 +1,28 @@
+snippet fn "[public] fun()"
+	${1:function}(${2})${3/.+/: /}${3} {
+		${0}
+	}
+
+snippet fn+ "public fun()"
+	public ${1:function}(${2})${3/.+/: /}${3} {
+		${0}
+	}
+
+snippet fn- "private fun()"
+	private ${1:function}(${2})${3/.+/: /}${3} {
+		${0}
+	}
+
+snippet exp "export class"
+	export ${1:class} ${2:ClassName} {
+		${3:constructor($4) {$5}}
+	}
+
+snippet pub "public attribute"
+	public ${1:name}${2/.+/: /}${2:string}
+
+snippet pr "private attribute"
+	private ${1:name}${2/.+/: /}${2:string}
+
+snippet : "var: type"
+	$1: $0

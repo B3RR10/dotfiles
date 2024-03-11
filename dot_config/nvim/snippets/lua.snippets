@@ -1,0 +1,19 @@
+snippet lsp "New lsp server"
+	local lspconfig = require('lspconfig')
+	local util = require('lsp.util')
+
+	lspconfig.${1:server}.setup {
+		on_attach = util.on_attach${2:,
+		${3:options}}
+	}
+
+snippet plug "Plugin config"
+	local M = {}
+
+	function M.setup()
+		require('${1:plugin}').setup({
+			$0
+		})
+	end
+
+	return M

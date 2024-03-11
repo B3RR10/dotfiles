@@ -1,0 +1,165 @@
+if not require('config').pde.csharp then
+  return {}
+end
+
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, { 'c_sharp' })
+    end,
+  },
+  {
+    'williamboman/mason.nvim',
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, {
+        -- FIXME: Linux specific
+        'netcoredbg',
+        'omnisharp',
+      })
+    end,
+  },
+  {
+    'Hoffs/omnisharp-extended-lsp.nvim',
+  },
+  {
+    'neovim/nvim-lspconfig',
+    opts = {
+      servers = function()
+        local omnisharp_bin = require('mason.settings').current.install_root_dir .. '/packages/omnisharp/omnisharp'
+        local pid = vim.fn.getpid()
+
+        return {
+          omnisharp = {
+            handlers = {
+              ['textDocument/definition'] = require('omnisharp_extended').handler,
+            },
+            cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) },
+            enable_ms_build_load_projects_on_demand = true,
+            enable_roslin_analyzers = true,
+            enable_import_completion = true,
+            organize_imports_on_format = true,
+          },
+        }
+      end,
+      setup = {
+        omnisharp = function()
+          local lsp_utils = require('base.lsp.utils')
+          lsp_utils.on_attach(function(client, _)
+            if client.name == 'omnisharp' then
+              -- https://github.com/OmniSharp/omnisharp-roslyn/issues/2483
+              local function toSnakeCase(str)
+                return string.gsub(str, '%s*[- ]%s*', '_')
+              end
+
+              local tokenModifiers = client.server_capabilities.semanticTokensProvider.legend.tokenModifiers
+              for i, v in ipairs(tokenModifiers) do
+                tokenModifiers[i] = toSnakeCase(v)
+              end
+              local tokenTypes = client.server_capabilities.semanticTokensProvider.legend.tokenTypes
+              for i, v in ipairs(tokenTypes) do
+                tokenTypes[i] = toSnakeCase(v)
+              end
+            end
+          end)
+        end,
+      },
+    },
+  },
+  {
+    'mfussenegger/nvim-dap',
+{{- if eq .chezmoi.os "darwin" }}
+    dependencies = { 'Cliffback/netcoredbg-macOS-arm64.nvim' },
+{{- end }}
+    opts = {
+      setup = {
+        netcoredbg = function(_, _)
+          local dap = require('dap')
+
+          vim.g.dotnet_build_project = function()
+            local default_path = vim.fn.getcwd() .. '/'
+            if vim.g['dotnet_last_proj_path'] ~= nil then
+              default_path = vim.g['dotnet_last_proj_path']
+            end
+            local path = vim.fn.input('Path to your *proj file', default_path, 'file')
+            vim.g['dotnet_last_proj_path'] = path
+            local cmd = 'dotnet build -c Debug ' .. path .. ' > /dev/null'
+            print('')
+            print('Cmd to execute: ' .. cmd)
+            local f = os.execute(cmd)
+            if f == 0 then
+              print('\nBuild: ✔️ ')
+            else
+              print('\nBuild: ✗ (code: ' .. f .. ')')
+            end
+          end
+
+          -- TODO: Custom logic to find the dll of the current project
+          -- * If a parent solution exists, get a list of all the csproj files found
+          -- * Add picker for selecting the project to execute (from the list above)
+          -- * Find the dll in the /bin/Debug directory of the picked project
+          -- * Handle when multiple matches (when multiple dotnet targets)
+          -- * Cache the selection (or persist it) and pre-select the entry in the list above
+          -- * Maybe with this selection, also rebuild the project (always and without asking?)
+
+          vim.g.dotnet_get_dll_path = function()
+            local request = function()
+              return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+            end
+
+            if vim.g['dotnet_last_dll_path'] == nil then
+              vim.g['dotnet_last_dll_path'] = request()
+            else
+              if vim.fn.confirm('Change path to dll?\n' .. vim.g['dotnet_last_dll_path'], '&yes\n&no', 2) == 1 then
+                vim.g['dotnet_last_dll_path'] = request()
+              end
+            end
+
+            return vim.g['dotnet_last_dll_path']
+          end
+
+          dap.configurations.cs = {
+            {
+              name = 'launch - netcoredbg',
+              type = 'coreclr',
+              request = 'launch',
+              program = function()
+                if vim.fn.confirm('Recompile first?', '&yes\n&no', 2) == 1 then
+                  vim.g.dotnet_build_project()
+                end
+                return vim.g.dotnet_get_dll_path()
+              end,
+            },
+          }
+
+{{- if eq .chezmoi.os "darwin" }}
+          local netcoredbg = vim.fn.stdpath('data') .. '/lazy/netcoredbg-macOS-arm64.nvim/netcoredbg/netcoredbg'
+{{- else }}
+          local netcoredbg = require('mason-registry').get_package('netcoredbg'):get_install_path() .. '/netcoredbg',
+{{- end }}
+
+          local adapter_config = {
+            type = 'executable',
+            command = netcoredbg,
+            args = { '--interpreter=vscode' },
+          }
+          dap.adapters.coreclr = adapter_config
+          dap.adapters.netcoredbg = adapter_config
+        end,
+      },
+    },
+  },
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'Issafalcon/neotest-dotnet',
+    },
+    opts = function(_, opts)
+      opts.adapters = opts.adapters or {}
+      vim.list_extend(opts.adapters, {
+        require('neotest-dotnet'),
+      })
+    end,
+  },
+}
