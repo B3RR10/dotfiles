@@ -136,7 +136,7 @@ return {
 {{- if eq .chezmoi.os "darwin" }}
           local netcoredbg = vim.fn.stdpath('data') .. '/lazy/netcoredbg-macOS-arm64.nvim/netcoredbg/netcoredbg'
 {{- else }}
-          local netcoredbg = require('mason-registry').get_package('netcoredbg'):get_install_path() .. '/netcoredbg',
+          local netcoredbg = require('mason-registry').get_package('netcoredbg'):get_install_path() .. '/netcoredbg'
 {{- end }}
 
           local adapter_config = {
