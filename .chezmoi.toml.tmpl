@@ -4,3 +4,12 @@
 [data]
 git_email = {{ $git_email | quote }}
 git_sign_commits = {{ $git_sign_commits }}
+
+[diff]
+command = "delta"
+args = ["{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+pager = "delta"
+
+[merge]
+command = "nvim"
+args = ["-d", "{{ "{{" }} .Source {{ "}}" }}", "{{ "{{" }} .Destination {{ "}}" }}"]
