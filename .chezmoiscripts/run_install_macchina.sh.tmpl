@@ -1,17 +1,14 @@
-{{ if (lookPath "macchina" | not) }}
+{{- if (lookPath "macchina" | not) -}}
 #!/bin/bash
 
-    {{ if eq .chezmoi.os "darwin" }}
+    {{- if eq .chezmoi.os "darwin" }}
 brew install macchina
-    {{ else if eq .chezmoi.os "linux" }}
-URL="https://github.com/Macchina-CLI/macchina/releases/download"
-VERSION={{ (gitHubLatestRelease "Macchina-CLI/macchina").TagName }}
-
-        {{ if eq .chezmoi.arch "amd64" }}
-{{ if ne .chezmoi.uid "0" }}sudo {{ end -}}curl -Lo /usr/local/bin/macchina "$URL/$VERSION/macchina-linux-x86_64"
-        {{ else if eq .chezmoi.arch "arm64" }}
-{{ if ne .chezmoi.uid "0" }}sudo {{ end -}}curl -Lo /usr/local/bin/macchina "$URL/$VERSION/macchina-linux-aarch64"
-        {{ end }}
+    {{- else if eq .chezmoi.os "linux" }}
+        {{- if eq .chezmoi.arch "amd64" }}
+{{ if ne .chezmoi.uid "0" }}sudo {{ end -}}curl -Lo /usr/local/bin/macchina https://github.com/Macchina-CLI/macchina/releases/download/{{ (gitHubLatestRelease "Macchina-CLI/macchina").TagName }}/macchina-linux-x86_64
+        {{- else if eq .chezmoi.arch "arm64" }}
+{{ if ne .chezmoi.uid "0" }}sudo {{ end -}}curl -Lo /usr/local/bin/macchina https://github.com/Macchina-CLI/macchina/releases/download/{{ (gitHubLatestRelease "Macchina-CLI/macchina").TagName }}/macchina-linux-aarch64
+        {{- end }}
 {{ if ne .chezmoi.uid "0" }}sudo {{ end -}}chmod +x /usr/local/bin/macchina
-    {{ end }}
-{{ end }}
+    {{- end }}
+{{- end }}

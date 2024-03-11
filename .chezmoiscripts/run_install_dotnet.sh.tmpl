@@ -1,7 +1,7 @@
 {{- if (lookPath "dotnet" | not) -}}
 #!/bin/bash
 
-    {{- if eq .chezmoi.os "darwin" -}}
+    {{- if eq .chezmoi.os "darwin" }}
 brew tap isen-ng/dotnet-sdk-versions
 brew install --cask dotnet-sdk6-0-400 dotnet-sdk7-0-400 dotnet-sdk8-0-200
     {{- else if eq .chezmoi.os "linux" }}
