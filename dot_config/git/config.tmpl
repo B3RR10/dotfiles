@@ -1,0 +1,75 @@
+[alias]
+    contrib = shortlog --summary --numbered
+[apply]
+    whitespace = fix
+[branch]
+    autoSetupRebase = always
+[commit]
+{{- if .git_sign_commits }}
+    gpgsign = true
+{{- end }}
+    template = ~/.config/git/commit-message
+[core]
+    pager = delta
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    bare = false
+[delta]
+    features = line-numbers decorations
+    syntax-theme = Dracula
+    minus-style = red bold
+    plus-style = green bold
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = red
+    line-numbers-plus-style = green
+[diff "bin"]
+    textconv = hexdump -v -C
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    process = git-lfs filter-process
+    required = true
+    smudge = git-lfs smudge -- %f
+[filter "age"]
+    clean = git-age clean -- %f
+    smudge = git-age smudge -- %f
+    required = true
+[init]
+    defaultBranch = main
+[interactive]
+    diffFilter = delta --color-only
+[merge]
+    log = true
+    tool = diffconflicts
+[mergetool]
+    keepBackup = false
+    prompt = false
+[mergetool "diffconflicts"]
+    cmd = "nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\""
+    trustExitCode = true
+[pull]
+    rebase = merge
+[push]
+    autoSetupRemote = true
+    default = simple
+    followTags = true
+    useForceIfIncludes = true
+[rebase]
+    abbreviateCommands = true
+    autosquash = true
+    autostash = true
+    updateRefs = true
+[rerere]
+    autoUpdate = true
+    enable = true
+[user]
+    email = {{ .git_email | quote }}
+    name = Miguel Berrio
+{{- if .git_sign_commits }}
+    signingkey = A9FDFA72
+{{- end }}

@@ -1,0 +1,29 @@
+
+
+# ##### Title #####
+# $type($scope): $subject
+
+# type: what type of change this commit contains.
+# scope: what item of code this commit is changing.
+# subject: a short description of the changes.
+
+# Type:
+# feat: A new feature
+# fix: A bug fix
+# docs: Documentation only changes
+# style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+# refactor: A code change that neither fixes a bug or adds a feature
+# perf: A code change that improves performance
+# test: Adding missing tests
+# build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+# ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+# chore: Other changes that don't modify src or test files
+# revert: Reverts a previous commit
+# wip: While working on a fix/feature
+
+# ##### Body #####
+# Explain *what* and *why* (not *how*). Include task ID (Jira issue).
+
+# At the end: Include Co-authored-by for all contributors.
+# Include at least one empty line before it. Format:
+# Co-authored-by: name <user@users.noreply.github.com>
