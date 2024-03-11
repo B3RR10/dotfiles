@@ -1,0 +1,34 @@
+[[ -f $ZNAP_HOME/znap.zsh ]] ||
+    git clone --depth 1 https://github.com/marlonrichert/zsh-snap.git $ZNAP_HOME
+
+source $ZNAP_HOME/znap.zsh
+
+znap source ohmyzsh/ohmyzsh \
+    lib/{git,key-bindings} \
+    plugins/{colored-man-pages,{{- if eq .chezmoi.os "darwin" }}brew,{{- end}}direnv,fzf,git,git-extras,kubectl,rsync,terraform}
+
+znap source Aloxaf/fzf-tab
+# set case insensitive and partial completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+znap source rupa/z
+
+znap source zsh-users/zsh-completions
+
+# znap source marlonrichert/zsh-autocomplete
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
+znap source zsh-users/zsh-syntax-highlighting
+
+{{- if eq .chezmoi.os "darwin" }}
+# Completions
+fpath=(/opt/homebrew/share/zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
+{{- end }}
+
+# rust completions
+command -v rustup >/dev/null && znap fpath _rustup 'rustup completions zsh'
+command -v rustup >/dev/null && znap fpath _cargo 'rustup completions zsh cargo'

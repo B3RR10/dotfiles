@@ -1,0 +1,54 @@
+# bat
+export BAT_THEME="Solarized (dark)"
+export BAT_STYLE="full"
+
+# Dotnet
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export PATH="$PATH:$HOME/.dotnet/tools"
+
+#  Env Programs
+export EDITOR=nvim
+export BROWSER=firefox
+export GIT_EDITOR=nvim
+export VISUAL=nvim
+export LESSCHARSET=UTF-8
+# export TERMINAL=alacritty
+
+#  fzf settings
+{{- if eq .chezmoi.os "darwin" }}
+export FZF_BASE=$(brew --prefix fzf)
+{{- end }}
+
+_fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" --exclude ".wine" . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --type f --exclude .git --exclude .wine'
+export FZF_TMUX=1
+export FZF_TMUX_HEIGHT=30\%
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='command cat <(fd -t d --exclude .git --exclude .wine) <(fd -t d --hidden --follow --exclude .git --exclude .wine . ~)'
+export FZF_ALT_C_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+# git-grab
+export GRAB_HOME=$HOME/src
+
+# History
+[ -z "$HISTFILE" ] && HISTFILE="$XDG_CACHE_HOME/zsh/history"
+[ ! -d $(dirname $HISTFILE) ] && mkdir -p $(dirname $HISTFILE)
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# Rust
+export PATH=$PATH:$HOME/.cargo/bin
+export RUST_SRC_PATH=~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
+
+# z
+export _Z_DATA=$XDG_CACHE_HOME/z
+export _Z_NO_RESOLVE_SYMLINKS=1
+
+# vim: foldmethod=marker

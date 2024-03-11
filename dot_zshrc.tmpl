@@ -1,0 +1,12 @@
+{{- if eq .chezmoi.os "darwin" }}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+{{- end }}
+for file in $HOME/.config/zsh/*.zsh; do
+    source "$file"
+done
+
+macchina
+
+znap eval starship 'starship init zsh'
+znap prompt
