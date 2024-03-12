@@ -2,8 +2,11 @@
 {{- $git_sign_commits := promptBoolOnce . "git_sign_commits" "Sign commits?" true -}}
 
 [data]
-git_email = {{ $git_email | quote }}
-git_sign_commits = {{ $git_sign_commits }}
+sudo = "{{ if ne .chezmoi.uid "0" }}sudo {{ end }}"
+
+[data.git]
+email = {{ $git_email | quote }}
+sign_commits = {{ $git_sign_commits }}
 
 [diff]
 command = "delta"

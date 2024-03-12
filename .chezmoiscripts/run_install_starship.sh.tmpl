@@ -4,6 +4,6 @@
     {{- if eq .chezmoi.os "darwin" }}
 brew install starship
     {{- else if eq .chezmoi.os "linux" }}
-curl -sS https://starship.rs/install.sh | {{ if ne .chezmoi.uid "0" }}sudo {{ end -}}sh -s -- --yes --bin-dir "/usr/local/bin"
+curl -sS "https://starship.rs/install.sh" | {{ .sudo -}}sh -s -- --yes --bin-dir "/usr/local/bin"
     {{- end }}
 {{- end }}
