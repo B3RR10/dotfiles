@@ -1,0 +1,42 @@
+{{- if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "fedora")) -}}
+#!/bin/bash
+
+{{- $packages := list
+    "bat"
+    "curl"
+    "dnf-plugins-core"
+    "exa"
+    "eza"
+    "fd-find"
+    "fzf"
+    "gcc"
+    "gcc-c++"
+    "git"
+    "git-absorb"
+    "git-delta"
+    "git-extras"
+    "git-lfs"
+    "htop"
+    "icu"
+    "jq"
+    "just"
+    "libicu"
+    "neovim"
+    "nodejs"
+    "ripgrep"
+    "tmux"
+    "unzip"
+    "vifm"
+    "zsh"
+}}
+
+    {{- if ne ($packages | len) 0 }}
+{{ .sudo -}}dnf install \
+        {{- range $packages -}}
+            {{- if (lookPath . | not) }}
+    {{ . }} \
+            {{- end }}
+        {{- end }}
+    -y
+    {{- end }}
+{{- end }}
