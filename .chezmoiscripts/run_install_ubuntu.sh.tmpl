@@ -5,7 +5,6 @@
     "bat"
     "build-essential"
     "curl"
-    "delta-bin"
     "eza"
     "fd-find"
     "fzf"
@@ -49,5 +48,14 @@ echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable
             {{- end }}
         {{- end }}
     -y
+    {{- end }}
+
+    {{- if (lookPath "delta" | not) }}
+        {{- if eq .chezmoi.arch "amd64" }}
+curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/download/git-delta_{{ (gitHubLatestRelease "dandavison/delta").TagName }}_amd64.deb
+        {{- else if eq .chezmoi.arch "arm64" }}
+curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/download/git-delta_{{ (gitHubLatestRelease "dandavison/delta").TagName }}_arm64.deb
+        {{- end }}
+{{ .sudo -}}dpkg -i /tmp/git-delta.deb
     {{- end }}
 {{- end }}
