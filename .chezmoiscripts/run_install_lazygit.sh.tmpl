@@ -9,6 +9,6 @@ curl -L https://github.com/jesseduffield/lazygit/releases/latest/download/lazygi
         {{- else if eq .chezmoi.arch "arm64" }}
 curl -L https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_{{ (gitHubLatestRelease "jesseduffield/lazygit").TagName | replaceAllRegex "v" "" }}_Linux_arm64.tar.gz \
         {{- end }}
-    | {{ if ne .chezmoi.uid "0" }}sudo {{ end -}}tar -xvz -C "$/usr/local/bin" lazygit
+    | {{ if ne .chezmoi.uid "0" }}sudo {{ end -}}tar -xvz -C "/usr/local/bin" lazygit
     {{- end }}
 {{- end }}
