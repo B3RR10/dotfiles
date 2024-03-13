@@ -1,4 +1,4 @@
-if not require('config').pde.fsharp then
+if vim.fn.executable('dotnet') ~= 1 then
   return {}
 end
 

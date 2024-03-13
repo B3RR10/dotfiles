@@ -1,4 +1,4 @@
-if not require('config').pde.python then
+if vim.fn.executable('python3') ~= 1 then
   return {}
 end
 

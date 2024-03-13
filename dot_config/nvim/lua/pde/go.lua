@@ -1,4 +1,4 @@
-if not require('config').pde.go then
+if vim.fn.executable('go') ~= 1 then
   return {}
 end
 

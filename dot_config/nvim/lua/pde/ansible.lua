@@ -1,4 +1,4 @@
-if not require('config').pde.ansible then
+if vim.fn.executable('ansible') ~= 1 then
   return {}
 end
 

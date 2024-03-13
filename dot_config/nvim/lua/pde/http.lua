@@ -1,7 +1,3 @@
-if not require('config').pde.http then
-  return {}
-end
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',

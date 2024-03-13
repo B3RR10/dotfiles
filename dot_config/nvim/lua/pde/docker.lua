@@ -1,4 +1,4 @@
-if not require('config').pde.docker then
+if vim.fn.executable('docker') ~= 1 then
   return {}
 end
 

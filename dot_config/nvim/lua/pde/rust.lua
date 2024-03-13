@@ -1,4 +1,4 @@
-if not require('config').pde.rust then
+if vim.fn.executable('cargo') ~= 1 then
   return {}
 end
 

@@ -1,7 +1,3 @@
-if not require('config').pde.vim then
-  return {}
-end
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',

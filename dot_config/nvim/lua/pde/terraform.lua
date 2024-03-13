@@ -1,4 +1,4 @@
-if not require('config').pde.terraform then
+if vim.fn.executable('terraform') ~= 1 and vim.fn.executable('tofu') ~= 1 then
   return {}
 end
 
