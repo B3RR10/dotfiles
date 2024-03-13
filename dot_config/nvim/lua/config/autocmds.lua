@@ -14,23 +14,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Strip trailing spaces and convert tabs to spaces
 vim.api.nvim_create_autocmd('BufWritePre', {
   callback = function()
-    local ft = vim.bo.filetype
-    if ft == 'gitcommit' or ft == 'diff' then
+    if vim.bo.filetype == 'gitcommit' or vim.wo.diff then
       return
     end
     local currentPos = vim.api.nvim_win_get_cursor(0)
     vim.cmd([[keeppatterns %s/\s\+$//e]])
     vim.api.nvim_win_set_cursor(0, currentPos)
-  end,
-  group = augroup('StripTrailingSpaces'),
-})
-vim.api.nvim_create_autocmd('BufWritePre', {
-  callback = function()
     if vim.bo.expandtab then
       vim.cmd('%retab!')
     end
   end,
-  group = augroup('Retab'),
+  group = augroup('FormatBeforeSave'),
 })
 
 -- Show relative numbers only in normal mode
