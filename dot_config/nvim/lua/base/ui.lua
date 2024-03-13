@@ -26,6 +26,9 @@ return {
   },
   {
     'hoob3rt/lualine.nvim',
+    dependencies = {
+      'AndreM222/copilot-lualine',
+    },
     event = 'VeryLazy',
     opts = function()
       local function isSession()
@@ -43,6 +46,7 @@ return {
           component_separators = '',
           section_separators = '',
           disabled_filetypes = {},
+          always_divide_middle = true,
         },
         sections = {
           lualine_a = { 'mode', isSession },
@@ -51,6 +55,7 @@ return {
             'filename',
           },
           lualine_x = {
+            'copilot',
             { require('lazy.status').updates, cond = require('lazy.status').has_updates, color = { fg = 'ff9e64' } },
             'searchcount',
             'encoding',
@@ -82,7 +87,7 @@ return {
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
         --tab_size = 18,
         diagnostics = 'nvim_lsp',
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        diagnostics_indicator = function(count, _, _, _)
           return ' (' .. count .. ')'
         end,
         offsets = { { filetype = 'NvimTree', text = 'File Explorer', text_align = 'left' } },
