@@ -222,14 +222,19 @@ return {
     'whiteinge/diffconflicts',
     cmd = 'DiffConflicts',
   },
-
   -- Enhance built-in search functionality showing labels at the end of each match.
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
     vscode = true,
-    opts = {},
-    -- stylua: ignore start
+    opts = {
+      label = {
+        rainbow = {
+          enabled = true,
+        },
+      },
+    },
+    -- stylua: ignore
     keys = {
       { '<Leader>s', mode = { 'n', 'o', 'x' }, function() require('flash').jump() end,   desc = 'Flash', },
       { '<Leader>S', mode = { 'n', 'o', 'x' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter', },
@@ -237,7 +242,6 @@ return {
       { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search', },
       { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search', },
     },
-    -- stylua: ignore end
   },
   {
     'norcalli/nvim-colorizer.lua',
