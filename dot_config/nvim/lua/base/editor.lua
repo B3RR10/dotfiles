@@ -1,17 +1,5 @@
 return {
   {
-    'ibhagwan/fzf-lua',
-    dependencies = { 'nvim-web-devicons' },
-    -- stylua: ignore
-    keys = {
-      { '<Leader><Space>', function() require('fzf-lua').buffers() end, desc = 'Fzf Buffers', },
-      { '<Leader>f', function() require('fzf-lua').files() end, desc = 'Fzf Files', },
-      { '<Leader>F', function() require('fzf-lua').files({ cwd = '~/' }) end, desc = 'Fzf Files ~', },
-      { '<Leader><Leader>', function() require('fzf-lua').builtin() end, desc = 'Fzf builtin commands', },
-      { '<Leader>r', function() require('fzf-lua').live_grep({ cmd = "rg --color=always --smart-case -g '!{.git,node_modules}/'" }) end, desc = 'Fzf RG', },
-    },
-  },
-  {
     'nvim-tree/nvim-tree.lua',
     keys = {
       { '<C-p>', '<Cmd>NvimTreeToggle<CR>', desc = 'Toggle neovim-tree' },
