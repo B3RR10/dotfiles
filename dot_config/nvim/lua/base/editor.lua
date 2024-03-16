@@ -281,4 +281,31 @@ return {
       wk.register(opts.defaults)
     end,
   },
+  {
+    'xvzc/chezmoi.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      edit = {
+        watch = true,
+        force = true,
+      },
+    },
+    config = function(_, opts)
+      require('chezmoi').setup(opts)
+
+      local chezmoi_source_path = require('chezmoi.commands.__source-path').execute()[1]
+      vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
+        pattern = { chezmoi_source_path .. '/*' },
+        callback = function()
+          vim.schedule(require('chezmoi.commands.__edit').watch)
+        end,
+      })
+      vim.api.nvim_create_autocmd('BufReadPost', {
+        pattern = { chezmoi_source_path .. '/*' },
+        callback = function()
+          vim.fn.chdir(chezmoi_source_path)
+        end,
+      })
+    end,
+  },
 }

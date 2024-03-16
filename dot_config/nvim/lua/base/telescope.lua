@@ -71,7 +71,10 @@ return {
       local telescope = require('telescope')
       telescope.setup(opts)
 
+      telescope.load_extension('chezmoi')
       telescope.load_extension('fzf')
+
+      vim.keymap.set('n', '<Leader>cz', telescope.extensions.chezmoi.find_files, {})
     end,
   },
 }
