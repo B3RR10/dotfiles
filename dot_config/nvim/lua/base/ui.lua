@@ -39,6 +39,24 @@ return {
         end
       end
 
+      --- @param trunc_width number trunctates component when screen width is less than trunc_width
+      --- @param trunc_len number truncates component to trunc_len number of chars
+      --- @param hide_width number? hides component when window width is smaller then hide_width
+      --- @param no_ellipsis boolean whether to disable adding '...' at end after truncation
+      --- return function that can format the component accordingly
+      local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
+        return function(str)
+          local win_width = vim.fn.winwidth(0)
+          if hide_width and win_width < hide_width then
+            return ''
+          elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+            return str:sub(1, trunc_len) .. (no_ellipsis and '' or '…')
+          else
+            return str
+          end
+        end
+      end
+
       return {
         options = {
           icons_enabled = true,
@@ -50,9 +68,13 @@ return {
         },
         sections = {
           lualine_a = { 'mode', isSession },
-          lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
+          lualine_b = {
+            { 'branch', fmt = trunc(150, 20, 80, false) },
+            'diff',
+            { 'diagnostics', sources = { 'nvim_lsp' } },
+          },
           lualine_c = {
-            'filename',
+            { 'filename', fmt = trunc(100, 30, nil, false) },
           },
           lualine_x = {
             'copilot',
