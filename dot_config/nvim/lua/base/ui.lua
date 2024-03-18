@@ -48,12 +48,23 @@ return {
         return function(str)
           local win_width = vim.fn.winwidth(0)
           if hide_width and win_width < hide_width then
-            return ''
+            return ' '
           elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
             return str:sub(1, trunc_len) .. (no_ellipsis and '' or '…')
           else
             return str
           end
+        end
+      end
+
+      local function diff_sources()
+        local gitsigns = vim.b.gitsigns_status_dict
+        if gitsigns then
+          return {
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed,
+          }
         end
       end
 
@@ -69,8 +80,8 @@ return {
         sections = {
           lualine_a = { 'mode', isSession },
           lualine_b = {
-            { 'branch', fmt = trunc(150, 20, 80, false) },
-            'diff',
+            { 'b:gitsigns_head', icon = '', fmt = trunc(150, 20, 80, false) },
+            { 'diff', source = diff_sources },
             { 'diagnostics', sources = { 'nvim_lsp' } },
           },
           lualine_c = {
