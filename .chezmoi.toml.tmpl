@@ -10,7 +10,7 @@ sign_commits = {{ $git_sign_commits }}
 
 [diff]
 command = "delta"
-args = ["{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+args = ["--pager", "always", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
 pager = "delta"
 
 [merge]
