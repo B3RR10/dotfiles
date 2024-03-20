@@ -36,9 +36,13 @@ return {
         enable = true,
       },
       textobjects = {
+        move = {
+          enable = true,
+          set_jumps = true,
+        },
         select = {
           enable = true,
-          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = false,
           keymaps = {
             ['aa'] = '@parameter.outer',
             ['ia'] = '@parameter.inner',

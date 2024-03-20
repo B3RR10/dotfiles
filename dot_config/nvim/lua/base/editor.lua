@@ -123,27 +123,11 @@ return {
     },
     config = function(_, opts)
       require('illuminate').configure(opts)
-
-      local function map(key, dir, buffer)
-        vim.keymap.set('n', key, function()
-          require('illuminate')['goto_' .. dir .. '_reference'](false)
-        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. ' Reference', buffer = buffer })
-      end
-
-      map('[[', 'prev')
-      map(']]', 'next')
-
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function()
-          local buffer = vim.api.nvim_get_current_buf()
-          map('[[', 'prev', buffer)
-          map(']]', 'next', buffer)
-        end,
-      })
     end,
+    -- stylua: ignore
     keys = {
-      { '[[', desc = 'Prev Reference' },
-      { ']]', desc = 'Next Reference' },
+      { '[[', function() require('illuminate').goto_prev_reference() end, desc = 'Prev Reference', },
+      { ']]', function() require('illuminate').goto_next_reference() end, desc = 'Next Reference', },
     },
   },
   {
