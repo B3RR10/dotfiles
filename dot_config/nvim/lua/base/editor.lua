@@ -225,6 +225,11 @@ return {
     config = true,
   },
   {
+    'stevearc/dressing.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
     'kdheepak/lazygit.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
@@ -261,6 +266,7 @@ return {
       },
     },
     config = function(_, opts)
+      vim.o.timeoutlen = 300
       local wk = require('which-key')
       wk.setup(opts.setup)
       wk.register(opts.defaults)
