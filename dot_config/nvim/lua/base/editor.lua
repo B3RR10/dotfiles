@@ -171,22 +171,10 @@ return {
     config = true,
   },
   {
-    'echasnovski/mini.surround',
+    'kylechui/nvim-surround',
+    version = '*',
     event = 'VeryLazy',
-    opts = {
-      mappings = {
-        add = 'ys',
-        delete = 'ds',
-        replace = 'cs',
-        find = 'gs',
-        find_left = 'gS', -- Find surrounding (to the left)
-        highlight = 'zs', -- Highlight surrounding
-        update_n_lines = '', -- Update `n_lines`
-
-        suffix_last = 'l', -- Suffix to search with "prev" method
-        suffix_next = 'n', -- Suffix to search with "next" method
-      },
-    },
+    config = true,
   },
   {
     'folke/zen-mode.nvim',
