@@ -273,6 +273,21 @@ return {
     end,
   },
   {
+    'j-hui/fidget.nvim',
+    event = 'VeryLazy',
+    version = 'v1.*',
+    config = {
+      progress = {
+        display = {
+          done_ttl = 10,
+        },
+      },
+      notification = {
+        override_vim_notify = true,
+      },
+    },
+  },
+  {
     'xvzc/chezmoi.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
