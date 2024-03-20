@@ -28,6 +28,36 @@ return {
     },
   },
   {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim', 'telescope.nvim' },
+    event = 'VeryLazy',
+    keys = function()
+      local harpoon = require('harpoon')
+      -- stylua: ignore
+      return {
+        { '<Leader>ha', function() harpoon:list():append() end, desc = 'Append current buffer to harpoon list', },
+        { '<Leader>hl', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = 'Open harpoon window' },
+
+        { '<Leader>1', function() harpoon:list():nav_file(1) end, desc = 'Jump to 1st on the list', },
+        { '<Leader>2', function() harpoon:list():nav_file(2) end, desc = 'Jump to 2nd on the list', },
+        { '<Leader>3', function() harpoon:list():nav_file(3) end, desc = 'Jump to 3rd on the list', },
+        { '<Leader>4', function() harpoon:list():nav_file(4) end, desc = 'Jump to 4th on the list', },
+
+        { '<Leader>hp', function() harpoon:list():prev({ ui_nav_wrap = true }) end, desc = 'Jump to previous on the list', },
+        { '<Leader>hn', function() harpoon:list():next({ ui_nav_wrap  = true }) end, desc = 'Jump to next on the list', },
+      }
+    end,
+    config = function()
+      local harpoon = require('harpoon')
+      harpoon:setup({
+        settings = {
+          save_on_toggle = true,
+        },
+      })
+    end,
+  },
+  {
     'lewis6991/gitsigns.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     opts = {
@@ -53,19 +83,19 @@ return {
         -- stylua: ignore start
         map("n", "]h", gs.next_hunk, "Next Hunk")
         map("n", "[h", gs.prev_hunk, "Prev Hunk")
-        map('n', '<leader>hs', gs.stage_hunk, 'Stage hunk')
-        map('n', '<leader>hr', gs.reset_hunk, 'Reset hunk')
-        map('v', '<leader>hs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Stage hunk')
-        map('v', '<leader>hr', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Reset hunk')
-        map('n', '<leader>hS', gs.stage_buffer, 'Stage buffer')
-        map('n', '<leader>hu', gs.undo_stage_hunk, 'Undo stage hunk')
-        map('n', '<leader>hR', gs.reset_buffer, 'Reset buffer')
-        map('n', '<leader>hp', gs.preview_hunk, 'Preview hunk')
-        map('n', '<leader>hb', function() gs.blame_line({ full = true }) end, 'Blame line')
-        map('n', '<leader>htb', gs.toggle_current_line_blame, 'Toggle current line blame')
-        map('n', '<leader>hd', gs.diffthis, 'diffthis')
-        map('n', '<leader>hD', function() gs.diffthis('~') end, 'diffthis ~')
-        map('n', '<leader>htd', gs.toggle_deleted, 'Toggle deleted')
+        map('n', '<leader>gs', gs.stage_hunk, 'Stage hunk')
+        map('n', '<leader>gr', gs.reset_hunk, 'Reset hunk')
+        map('v', '<leader>gs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Stage hunk')
+        map('v', '<leader>gr', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, 'Reset hunk')
+        map('n', '<leader>gS', gs.stage_buffer, 'Stage buffer')
+        map('n', '<leader>gu', gs.undo_stage_hunk, 'Undo stage hunk')
+        map('n', '<leader>gR', gs.reset_buffer, 'Reset buffer')
+        map('n', '<leader>gp', gs.preview_hunk, 'Preview hunk')
+        map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, 'Blame line')
+        map('n', '<leader>gtb', gs.toggle_current_line_blame, 'Toggle current line blame')
+        map('n', '<leader>gd', gs.diffthis, 'diffthis')
+        map('n', '<leader>gD', function() gs.diffthis('~') end, 'diffthis ~')
+        map('n', '<leader>gtd', gs.toggle_deleted, 'Toggle deleted')
         -- stylua: ignore end
 
         -- Text object
@@ -240,7 +270,7 @@ return {
     'kdheepak/lazygit.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { '<Leader>g', '<Cmd>LazyGit<CR>', desc = 'LazyGit' },
+      { '<Leader>gg', '<Cmd>LazyGit<CR>', desc = 'LazyGit' },
     },
   },
   {
@@ -272,7 +302,8 @@ return {
       defaults = {
         mode = { 'n', 'v' },
         ['<Leader>f'] = { name = '+File' },
-        ['<Leader>h'] = { name = '+Hunk' },
+        ['<Leader>h'] = { name = '+Harpoon' },
+        ['<Leader>g'] = { name = '+Git' },
       },
     },
     config = function(_, opts)
