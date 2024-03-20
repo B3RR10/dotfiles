@@ -16,8 +16,9 @@ function M.on_attach(client, buffer)
   self:map('K', vim.lsp.buf.hover, { desc = 'Hover' })
   self:map('gK', vim.lsp.buf.signature_help, { desc = 'Signature Help', has = 'signatureHelp' })
 
-  -- self:map('<leader>ld', fzf.lsp_document_diagnostics, { desc = 'Show document diagnostics' })
-  -- self:map('<leader>lD', fzf.lsp_workspace_diagnostics, { desc = 'Show workspace diagnostics' })
+  -- stylua: ignore
+  self:map('<leader>ld', function() telescope.diagnostics({ bufnr = 0 }) end, { desc = 'Show document diagnostics' })
+  self:map('<leader>lD', telescope.diagnostics, { desc = 'Show workspace diagnostics' })
   self:map('[d', M.diagnostic_goto(false), { desc = 'Prev Diagnostic' })
   self:map(']d', M.diagnostic_goto(true), { desc = 'Next Diagnostic' })
   self:map('[e', M.diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
