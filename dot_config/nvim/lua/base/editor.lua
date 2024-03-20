@@ -206,11 +206,10 @@ return {
         },
       },
     },
-    -- stylua: ignore start
+    -- stylua: ignore
     keys = {
       { '<Leader>Z', function() require('zen-mode').toggle() end, desc = 'Zen Mode' },
     },
-    -- stylua: ignore end
   },
   {
     'whiteinge/diffconflicts',
@@ -220,7 +219,6 @@ return {
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
-    vscode = true,
     opts = {
       label = {
         rainbow = {
@@ -248,10 +246,6 @@ return {
     keys = {
       { '<Leader>gg', '<Cmd>LazyGit<CR>', desc = 'LazyGit' },
     },
-  },
-  {
-    'stevearc/dressing.nvim',
-    event = 'VeryLazy',
   },
   {
     'folke/which-key.nvim',
