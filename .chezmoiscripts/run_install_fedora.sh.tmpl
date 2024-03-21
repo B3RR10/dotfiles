@@ -38,7 +38,7 @@
 {{ .sudo -}}dnf copr enable atim/bottom -y
 
 # Add prskr repository for git-age
-curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=="1A80DDB584AF7DA7") | .raw_key' | {{ .sudo -}}tee /tmp/prskr.gpg
+curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=="1A80DDB584AF7DA7") | .raw_key' | {{ .sudo -}}tee /tmp/prskr.gpg > /dev/null
 {{ .sudo -}} rpm --import /tmp/prskr.gpg
 {{ .sudo -}}dnf config-manager --add-repo https://code.icb4dc0.de/api/packages/prskr/rpm.repo
 
