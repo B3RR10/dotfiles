@@ -3,6 +3,7 @@
 
 {{- $packages := list
     "bat"
+    "bottom"
     "curl"
     "dnf-plugins-core"
     "exa"
@@ -13,6 +14,7 @@
     "gcc-c++"
     "git"
     "git-absorb"
+    "git-age"
     "git-delta"
     "git-extras"
     "git-lfs"
@@ -30,6 +32,16 @@
     "zsh"
 }}
 
+{{ .sudo -}}dnf update -y
+
+# Add bottom copr
+{{ .sudo -}}dnf copr enable atim/bottom -y
+
+# Add prskr repository for git-age
+curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=="1A80DDB584AF7DA7") | .raw_key' | {{ .sudo -}}tee /tmp/prskr.gpg
+{{ .sudo -}} rpm --import /tmp/prskr.gpg
+{{ .sudo -}}dnf config-manager --add-repo https://code.icb4dc0.de/api/packages/prskr/rpm.repo
+
     {{- if ne ($packages | len) 0 }}
 {{ .sudo -}}dnf install \
         {{- range $packages -}}
@@ -39,4 +51,5 @@
         {{- end }}
     -y
     {{- end }}
+
 {{- end }}
