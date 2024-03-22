@@ -8,4 +8,4 @@ parser_configs.gotmpl = {
   used_by = { 'gotmpl', 'gohtmltmpl', 'gotexttmpl', 'yaml' },
 }
 
-vim.cmd('TSInstall gotmpl')
+-- vim.cmd('TSInstall gotmpl')
