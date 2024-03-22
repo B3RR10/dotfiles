@@ -1,0 +1,23 @@
+// If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+keybinds {
+    normal clear-defaults=true {
+        bind "Ctrl b" { SwitchToMode "Tmux"; }
+    }
+    tmux {
+        bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
+    }
+}
+
+plugins {
+    tab-bar { path "tab-bar"; }
+    status-bar { path "status-bar"; }
+    strider { path "strider"; }
+    compact-bar { path "compact-bar"; }
+    session-manager { path "session-manager"; }
+}
+
+// Toggle between having pane frames around the panes
+// pane_frames false
+
+theme "kanagawa"
