@@ -10,6 +10,7 @@
     "fzf"
     "git"
     "git-absorb"
+    "git-age"
     "git-extras"
     "git-lfs"
     "htop"
@@ -28,6 +29,14 @@
 }}
 
 [ -d /etc/apt/keyrings ] || {{ .sudo -}}mkdir -p /etc/apt/keyrings
+
+  {{- if (stat "/etc/apt/sources.list.d/forgejo.list" | not) }}
+# Add prskr repository for git-age
+# distribution is currently only bookworm - but should work for other debian based distributions as well
+echo "deb https://code.icb4dc0.de/api/packages/prskr/debian bookworm main" | \
+  {{ .sudo -}}tee -a /etc/apt/sources.list.d/forgejo.list
+{{ .sudo -}}curl https://code.icb4dc0.de/api/packages/prskr/debian/repository.key -o /etc/apt/trusted.gpg.d/forgejo-prskr.asc
+  {{- end }}
 
   {{- if (stat "/etc/apt/sources.list.d/prebuilt-mpr.list" | not) }}
 wget -qO- https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub | {{ .sudo -}}gpg --dearmor -o /etc/apt/keyrings/prebuilt-mpr-archive-keyring.gpg
