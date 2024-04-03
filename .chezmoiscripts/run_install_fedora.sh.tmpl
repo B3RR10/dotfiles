@@ -35,6 +35,7 @@
     "tmux"
     "unzip"
     "vifm"
+    "zellij"
     "zsh"
 }}
 
@@ -42,6 +43,9 @@
 
 # Add bottom copr
 {{ .sudo -}}dnf copr enable atim/bottom -y
+
+# Add zellij copr
+{{ .sudo -}}dnf copr enable varlad/zellij -y
 
 # Add prskr repository for git-age
 curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=="1A80DDB584AF7DA7") | .raw_key' | {{ .sudo -}}tee /tmp/prskr.gpg > /dev/null
