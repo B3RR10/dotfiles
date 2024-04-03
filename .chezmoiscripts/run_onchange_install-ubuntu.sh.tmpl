@@ -29,34 +29,35 @@
 
 [ -d /etc/apt/keyrings ] || {{ .sudo -}}mkdir -p /etc/apt/keyrings
 
-    {{- if (stat "/etc/apt/sources.list.d/prebuilt-mpr.list" | not) }}
+  {{- if (stat "/etc/apt/sources.list.d/prebuilt-mpr.list" | not) }}
 wget -qO- https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub | {{ .sudo -}}gpg --dearmor -o /etc/apt/keyrings/prebuilt-mpr-archive-keyring.gpg
 echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | {{ .sudo -}} tee /etc/apt/sources.list.d/prebuilt-mpr.list
-    {{- end }}
+  {{- end }}
 
-    {{- if (stat "/etc/apt/sources.list.d/gierens.list" | not) }}
+  {{- if (stat "/etc/apt/sources.list.d/gierens.list" | not) }}
 wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | {{ .sudo -}}gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
 echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | {{ .sudo -}}tee /etc/apt/sources.list.d/gierens.list
 //{{ .sudo -}}chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
-    {{- end }}
+  {{- end }}
 
-    {{- if ne ($packages | len) 0 }}
+  {{- if ne ($packages | len) 0 }}
 {{ .sudo -}}apt update
 {{ .sudo -}}apt install \
-        {{- range $packages -}}
-            {{- if (lookPath . | not) }}
+      {{- range $packages -}}
+          {{- if (lookPath . | not) }}
     {{ . }} \
-            {{- end }}
-        {{- end }}
+          {{- end }}
+      {{- end }}
     -y
-    {{- end }}
+  {{- end }}
 
-    {{- if (lookPath "delta" | not) }}
-        {{- if eq .chezmoi.arch "amd64" }}
+  {{- if (lookPath "delta" | not) }}
+      {{- if eq .chezmoi.arch "amd64" }}
 curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/download/git-delta_{{ (gitHubLatestRelease "dandavison/delta").TagName }}_amd64.deb
-        {{- else if eq .chezmoi.arch "arm64" }}
+      {{- else if eq .chezmoi.arch "arm64" }}
 curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/download/git-delta_{{ (gitHubLatestRelease "dandavison/delta").TagName }}_arm64.deb
-        {{- end }}
+      {{- end }}
 {{ .sudo -}}dpkg -i /tmp/git-delta.deb
-    {{- end }}
+  {{- end }}
+
 {{- end }}
