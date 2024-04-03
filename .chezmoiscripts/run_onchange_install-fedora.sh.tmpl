@@ -38,7 +38,7 @@
     "zsh"
 }}
 
-{{ .sudo -}}dnf update -y
+{{ .sudo -}}dnf update -x 'kernel*' -y
 
 # Add bottom copr
 {{ .sudo -}}dnf copr enable atim/bottom -y
