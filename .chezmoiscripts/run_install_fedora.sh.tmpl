@@ -4,8 +4,13 @@
 {{- $packages := list
     "bat"
     "bottom"
+    "containerd.io"
     "curl"
     "dnf-plugins-core"
+    "docker-buildx-plugin"
+    "docker-ce"
+    "docker-ce-cli"
+    "docker-compose-plugin"
     "exa"
     "eza"
     "fd-find"
@@ -43,6 +48,9 @@ curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=
 {{ .sudo -}} rpm --import /tmp/prskr.gpg
 {{ .sudo -}}dnf config-manager --add-repo https://code.icb4dc0.de/api/packages/prskr/rpm.repo
 
+# Add docker repository
+{{ .sudo -}}dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
     {{- if ne ($packages | len) 0 }}
 {{ .sudo -}}dnf install \
         {{- range $packages -}}
@@ -52,5 +60,7 @@ curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=
         {{- end }}
     -y
     {{- end }}
+
+{{ .sudo -}}systemctl enable --now docker.service
 
 {{- end }}
