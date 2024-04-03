@@ -82,6 +82,15 @@ curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/
 {{ .sudo -}}dpkg -i /tmp/git-delta.deb
   {{- end }}
 
+  {{- if (lookPath "btm" | not) }}
+    {{- if eq .chezmoi.arch "amd64" }}
+curl -Lo /tmp/bottom.deb https://github.com/ClementTsang/bottom/releases/latest/download/bottom_{{ (gitHubLatestRelease "ClementTsang/bottom").TagName }}_amd64.deb
+    {{- else if eq .chezmoi.arch "arm64" }}
+curl -Lo /tmp/bottom.deb https://github.com/ClementTsang/bottom/releases/latest/download/bottom_{{ (gitHubLatestRelease "ClementTsang/bottom").TagName }}_arm64.deb
+    {{- end }}
+{{ .sudo -}}dpkg -i /tmp/bottom.deb
+  {{- end }}
+
 {{ .sudo }}systemctl enable --now docker.service
 
 {{- end }}
