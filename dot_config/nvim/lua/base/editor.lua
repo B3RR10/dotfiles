@@ -43,6 +43,11 @@ return {
         { '<Leader>2', function() harpoon:list():select(2) end, desc = 'Jump to 2nd on the list', },
         { '<Leader>3', function() harpoon:list():select(3) end, desc = 'Jump to 3rd on the list', },
         { '<Leader>4', function() harpoon:list():select(4) end, desc = 'Jump to 4th on the list', },
+        { '<Leader>5', function() harpoon:list():select(5) end, desc = 'Jump to 5th on the list', },
+        { '<Leader>6', function() harpoon:list():select(6) end, desc = 'Jump to 6th on the list', },
+        { '<Leader>7', function() harpoon:list():select(7) end, desc = 'Jump to 7th on the list', },
+        { '<Leader>8', function() harpoon:list():select(8) end, desc = 'Jump to 8th on the list', },
+        { '<Leader>9', function() harpoon:list():select(9) end, desc = 'Jump to 9th on the list', },
 
         { '<Leader>hp', function() harpoon:list():prev({ ui_nav_wrap = true }) end, desc = 'Jump to previous on the list', },
         { '<Leader>hn', function() harpoon:list():next({ ui_nav_wrap  = true }) end, desc = 'Jump to next on the list', },
