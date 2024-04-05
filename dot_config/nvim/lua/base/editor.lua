@@ -36,13 +36,13 @@ return {
       local harpoon = require('harpoon')
       -- stylua: ignore
       return {
-        { '<Leader>ha', function() harpoon:list():append() end, desc = 'Append current buffer to harpoon list', },
+        { '<Leader>ha', function() harpoon:list():add() end, desc = 'Add current buffer to harpoon list', },
         { '<Leader>hl', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = 'Open harpoon window' },
 
-        { '<Leader>1', function() harpoon:list():nav_file(1) end, desc = 'Jump to 1st on the list', },
-        { '<Leader>2', function() harpoon:list():nav_file(2) end, desc = 'Jump to 2nd on the list', },
-        { '<Leader>3', function() harpoon:list():nav_file(3) end, desc = 'Jump to 3rd on the list', },
-        { '<Leader>4', function() harpoon:list():nav_file(4) end, desc = 'Jump to 4th on the list', },
+        { '<Leader>1', function() harpoon:list():select(1) end, desc = 'Jump to 1st on the list', },
+        { '<Leader>2', function() harpoon:list():select(2) end, desc = 'Jump to 2nd on the list', },
+        { '<Leader>3', function() harpoon:list():select(3) end, desc = 'Jump to 3rd on the list', },
+        { '<Leader>4', function() harpoon:list():select(4) end, desc = 'Jump to 4th on the list', },
 
         { '<Leader>hp', function() harpoon:list():prev({ ui_nav_wrap = true }) end, desc = 'Jump to previous on the list', },
         { '<Leader>hn', function() harpoon:list():next({ ui_nav_wrap  = true }) end, desc = 'Jump to next on the list', },
