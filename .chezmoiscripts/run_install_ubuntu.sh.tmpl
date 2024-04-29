@@ -21,9 +21,7 @@
     "htop"
     "icu-devtools"
     "jq"
-    "just"
     "libicu-dev"
-    "neovim"
     "nodejs"
     "npm"
     "ripgrep"
@@ -41,13 +39,6 @@
 echo "deb https://code.icb4dc0.de/api/packages/prskr/debian bookworm main" | \
   {{ .sudo -}}tee -a /etc/apt/sources.list.d/forgejo.list
 {{ .sudo -}}curl https://code.icb4dc0.de/api/packages/prskr/debian/repository.key -o /etc/apt/trusted.gpg.d/forgejo-prskr.asc
-  {{- end }}
-
-  {{- if (stat "/etc/apt/sources.list.d/prebuilt-mpr.list" | not) }}
-wget -qO- https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub | \
-  {{ .sudo -}}gpg --dearmor -o /etc/apt/keyrings/prebuilt-mpr-archive-keyring.gpg
-echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | \
-  {{ .sudo -}} tee /etc/apt/sources.list.d/prebuilt-mpr.list
   {{- end }}
 
   {{- if (stat "/etc/apt/sources.list.d/gierens.list" | not) }}
@@ -91,6 +82,9 @@ curl -Lo /tmp/bottom.deb https://github.com/ClementTsang/bottom/releases/latest/
 {{ .sudo -}}dpkg -i /tmp/bottom.deb
   {{- end }}
 
-{{ .sudo }}systemctl enable --now docker.service
+{{ .sudo -}}snap install --edge --classic just
+{{ .sudo -}}snap install --beta --classic nvim
+
+{{ .sudo -}}systemctl enable --now docker.service
 
 {{- end }}
