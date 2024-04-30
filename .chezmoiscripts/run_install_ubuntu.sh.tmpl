@@ -22,8 +22,6 @@
     "icu-devtools"
     "jq"
     "libicu-dev"
-    "nodejs"
-    "npm"
     "ripgrep"
     "tmux"
     "unzip"
@@ -84,6 +82,7 @@ curl -Lo /tmp/bottom.deb https://github.com/ClementTsang/bottom/releases/latest/
 
 {{ .sudo -}}snap install --edge --classic just
 {{ .sudo -}}snap install --beta --classic nvim
+{{ .sudo -}}snap install --classic node
 
 {{ .sudo -}}systemctl enable --now docker.service
 
