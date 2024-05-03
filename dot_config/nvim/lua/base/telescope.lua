@@ -19,9 +19,11 @@ return {
       end
 
       local function find_files_from_project_git_root()
-        local opts = {}
+        local opts = {
+          hidden = true,
+        }
         if is_git_repo() then
-          opts = { cwd = get_git_root() }
+          vim.list_extend(opts, { cwd = get_git_root() })
         end
         builtin.find_files(opts)
       end
