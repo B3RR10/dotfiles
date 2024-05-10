@@ -51,6 +51,7 @@ return {
 
       return {
         defaults = {
+          file_ignore_patterns = { '.git/' },
           mappings = {
             i = {
               ['<Esc>'] = actions.close,
