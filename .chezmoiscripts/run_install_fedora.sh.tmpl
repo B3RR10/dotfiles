@@ -2,51 +2,21 @@
 #!/bin/bash
 
 {{- $packages := list
-    "bat"
-    "bottom"
     "containerd.io"
-    "curl"
     "dnf-plugins-core"
     "docker-buildx-plugin"
     "docker-ce"
     "docker-ce-cli"
     "docker-compose-plugin"
-    "exa"
-    "eza"
-    "fd-find"
-    "fzf"
     "gcc"
     "gcc-c++"
-    "git"
-    "git-absorb"
-    "git-age"
-    "git-delta"
-    "git-extras"
-    "git-lfs"
-    "golang"
-    "htop"
     "icu"
     "jq"
-    "just"
     "libicu"
-    "neovim"
-    "nodejs"
-    "ripgrep"
-    "tmux"
-    "unzip"
-    "vifm"
     "zsh"
 }}
 
 {{ .sudo -}}dnf update -x 'kernel*' -y
-
-# Add bottom copr
-{{ .sudo -}}dnf copr enable atim/bottom -y
-
-# Add prskr repository for git-age
-curl https://api.github.com/users/prskr/gpg_keys | jq -r '.[] | select (.key_id=="1A80DDB584AF7DA7") | .raw_key' | {{ .sudo -}}tee /tmp/prskr.gpg > /dev/null
-{{ .sudo -}} rpm --import /tmp/prskr.gpg
-{{ .sudo -}}dnf config-manager --add-repo https://code.icb4dc0.de/api/packages/prskr/rpm.repo
 
 # Add docker repository
 {{ .sudo -}}dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo

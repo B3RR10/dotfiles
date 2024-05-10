@@ -14,30 +14,6 @@
     "zsh"
 }}
 
-{{- $brew_packages := list
-    "bat"
-    "bottom"
-    "curl"
-    "eza"
-    "fd"
-    "fzf"
-    "git"
-    "git-absorb"
-    "git-delta"
-    "git-extras"
-    "git-lfs"
-    "htop"
-    "jq"
-    "just"
-    "neovim"
-    "node"
-    "prskr/the-prancing-package/git-age"
-    "ripgrep"
-    "tmux"
-    "unzip"
-    "vifm"
-}}
-
 [ -d /etc/apt/keyrings ] || {{ .sudo -}}mkdir -p /etc/apt/keyrings
 
   {{- if (stat "etc/apt/sources.list.d/docker.list" | not) }}
@@ -59,12 +35,5 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
   {{- end }}
 
 {{ .sudo -}}systemctl enable --now docker.service
-
-# Install Homebrew
-export NONINTERACTIVE=1
-export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-brew install {{ $brew_packages | join " " }}
 
 {{- end }}

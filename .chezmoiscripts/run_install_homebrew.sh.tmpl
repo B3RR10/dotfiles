@@ -1,0 +1,36 @@
+{{- if (eq .chezmoi.os "linux") -}}
+#!/bin/bash
+
+{{- $brew_packages := list
+    "bat"
+    "bottom"
+    "curl"
+    "eza"
+    "fd"
+    "fzf"
+    "git"
+    "git-absorb"
+    "git-delta"
+    "git-extras"
+    "git-lfs"
+    "go"
+    "htop"
+    "jq"
+    "just"
+    "neovim"
+    "node"
+    "prskr/the-prancing-package/git-age"
+    "ripgrep"
+    "tmux"
+    "unzip"
+    "vifm"
+}}
+
+# Install Homebrew
+export NONINTERACTIVE=1
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install {{ $brew_packages | join " " }}
+
+{{- end}}
