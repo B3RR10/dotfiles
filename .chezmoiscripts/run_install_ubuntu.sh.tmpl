@@ -2,47 +2,43 @@
 #!/bin/bash
 
 {{- $packages := list
-    "bat"
     "build-essential"
     "containerd.io"
-    "curl"
     "docker-buildx-plugin"
     "docker-ce"
     "docker-ce-cli"
     "docker-compose-plugin"
+    "icu-devtools"
+    "libicu-dev"
+    "zsh"
+}}
+
+{{- $brew_packages := list
+    "bat"
+    "bottom"
+    "curl"
+    "exa"
     "eza"
-    "fd-find"
+    "fd"
     "fzf"
     "git"
     "git-absorb"
-    "git-age"
+    "git-delta"
     "git-extras"
     "git-lfs"
     "htop"
-    "icu-devtools"
     "jq"
-    "libicu-dev"
+    "just"
+    "neovim"
+    "node"
+    "prskr/the-prancing-package/git-age"
     "ripgrep"
     "tmux"
     "unzip"
     "vifm"
-    "zsh"
 }}
 
 [ -d /etc/apt/keyrings ] || {{ .sudo -}}mkdir -p /etc/apt/keyrings
-
-  {{- if (stat "/etc/apt/sources.list.d/forgejo.list" | not) }}
-# Add prskr repository for git-age
-# distribution is currently only bookworm - but should work for other debian based distributions as well
-echo "deb https://code.icb4dc0.de/api/packages/prskr/debian bookworm main" | \
-  {{ .sudo -}}tee -a /etc/apt/sources.list.d/forgejo.list
-{{ .sudo -}}curl https://code.icb4dc0.de/api/packages/prskr/debian/repository.key -o /etc/apt/trusted.gpg.d/forgejo-prskr.asc
-  {{- end }}
-
-  {{- if (stat "/etc/apt/sources.list.d/gierens.list" | not) }}
-wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | {{ .sudo -}}gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
-echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | {{ .sudo -}}tee /etc/apt/sources.list.d/gierens.list
-  {{- end }}
 
   {{- if (stat "etc/apt/sources.list.d/docker.list" | not) }}
 # Add docker repository
@@ -62,28 +58,13 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
     -y
   {{- end }}
 
-  {{- if (lookPath "delta" | not) }}
-      {{- if eq .chezmoi.arch "amd64" }}
-curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/download/git-delta_{{ (gitHubLatestRelease "dandavison/delta").TagName }}_amd64.deb
-      {{- else if eq .chezmoi.arch "arm64" }}
-curl -Lo /tmp/git-delta.deb https://github.com/dandavison/delta/releases/latest/download/git-delta_{{ (gitHubLatestRelease "dandavison/delta").TagName }}_arm64.deb
-      {{- end }}
-{{ .sudo -}}dpkg -i /tmp/git-delta.deb
-  {{- end }}
-
-  {{- if (lookPath "btm" | not) }}
-    {{- if eq .chezmoi.arch "amd64" }}
-curl -Lo /tmp/bottom.deb https://github.com/ClementTsang/bottom/releases/latest/download/bottom_{{ (gitHubLatestRelease "ClementTsang/bottom").TagName }}_amd64.deb
-    {{- else if eq .chezmoi.arch "arm64" }}
-curl -Lo /tmp/bottom.deb https://github.com/ClementTsang/bottom/releases/latest/download/bottom_{{ (gitHubLatestRelease "ClementTsang/bottom").TagName }}_arm64.deb
-    {{- end }}
-{{ .sudo -}}dpkg -i /tmp/bottom.deb
-  {{- end }}
-
-{{ .sudo -}}snap install --edge --classic just
-{{ .sudo -}}snap install --beta --classic nvim
-{{ .sudo -}}snap install --classic node
-
 {{ .sudo -}}systemctl enable --now docker.service
+
+# Install Homebrew
+export NONINTERACTIVE=1
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install {{ $brew_packages | join " " }}
 
 {{- end }}
