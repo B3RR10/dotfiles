@@ -1,5 +1,6 @@
-{{- if eq .chezmoi.os "darwin" }}
-eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- $brew := findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") }}
+{{- if $brew }}
+eval "$({{ $brew }} shellenv)"
 
 {{- end }}
 for file in $HOME/.config/zsh/*.zsh; do
