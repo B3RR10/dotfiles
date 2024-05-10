@@ -16,20 +16,11 @@
     "zsh"
 }}
 
-{{ .sudo -}}dnf update -x 'kernel*' -y
-
 # Add docker repository
 {{ .sudo -}}dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
-    {{- if ne ($packages | len) 0 }}
-{{ .sudo -}}dnf install \
-        {{- range $packages -}}
-            {{- if (lookPath . | not) }}
-    {{ . }} \
-            {{- end }}
-        {{- end }}
-    -y
-    {{- end }}
+{{ .sudo -}}dnf upgrade -y
+{{ .sudo -}}dnf install -y {{ $packages | join " " }}
 
 {{ .sudo -}}systemctl enable --now docker.service
 
