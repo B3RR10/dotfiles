@@ -10,6 +10,7 @@
     "docker-compose-plugin"
     "icu-devtools"
     "libicu-dev"
+    "procps"
     "software-properties-common"
     "zsh"
 }}
@@ -24,6 +25,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
   {{- end}}
 
 {{ .sudo -}}apt update
+{{ .sudo -}}apt upgrade -y
 {{ .sudo -}}apt install -y {{ $packages | join " " }}
 
 {{ .sudo -}}systemctl enable --now docker.service
