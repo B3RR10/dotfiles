@@ -281,7 +281,7 @@ return {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
     version = 'v1.*',
-    config = {
+    opts = {
       progress = {
         display = {
           done_ttl = 10,

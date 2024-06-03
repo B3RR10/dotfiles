@@ -148,9 +148,6 @@ return {
         border = 'rounded',
       },
     },
-    config = function(_, opts)
-      require('crates').setup(opts)
-    end,
   },
   {
     'hrsh7th/nvim-cmp',
