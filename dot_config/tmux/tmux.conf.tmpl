@@ -77,8 +77,8 @@ bind -T copy-mode-vi 'y' send -X copy-pipe-and-cancel "tmux save-buffer - | reat
 # #############################
 #
 # status bar colors (Kanagawa)
-bg="#1F1F28"
-fg="#54546D"
+bg="#181616"
+fg="#C5C9C5"
 active_fg="#C8C093"
 border_fg="#262626"
 
@@ -105,7 +105,7 @@ set -g status-left "  #S  |  "
 set -g status-right-length "64"
 set -g status-right "|  #({{ .chezmoi.homeDir }}/.config/tmux/scripts/tmux-abbr-path '#{pane_current_path}')  |  #h  "
 
-status_string="#I #{b:pane_current_path} > #W"
-status_format="#{?window_zoomed_flag,#[dim]($status_string),$status_string}"
+status_string="#{b:pane_current_path} > #W"
+status_format="#{?window_zoomed_flag,#[dim]#I ($status_string),#I $status_string}"
 set-window-option -g window-status-current-format "$status_format"
 set-window-option -g window-status-format "$status_format"
