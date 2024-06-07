@@ -1,27 +1,37 @@
 return {
   {
     'rebelot/kanagawa.nvim',
-    event = 'VimEnter',
+    lazy = false,
     opts = {
-      undercurl = true, -- enable undercurls
-      commentStyle = { italic = true },
-      functionStyle = {},
-      keywordStyle = { italic = true },
-      statementStyle = { bold = true },
-      typeStyle = {},
-      variablebuiltinStyle = { italic = true },
-      specialReturn = true, -- special highlight for the return keyword
-      specialException = true, -- special highlight for exception handling keywords
-      transparent = false, -- do not set background color
       dimInactive = true, -- dim inactive window `:h hl-NormalNC`
-      globalStatus = false, -- adjust window separators highlight for laststatus=3
-      terminalColors = true, -- define vim.g.terminal_color_{0,17}
-      colors = {},
-      theme = 'default', -- Load "default" theme or the experimental "light" theme
+      colors = { theme = { all = { ui = { bg_gutter = 'none' } } } },
+      overrides = function(colors)
+        local theme = colors.theme
+        return {
+          -- completion menu
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+          PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
+          PmenuSbar = { bg = theme.ui.bg_m1 },
+          PmenuThumb = { bg = theme.ui.bg_p2 },
+          -- telescope window
+          TelescopeTitle = { fg = theme.ui.special, bold = true },
+          TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+          TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+          TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+          TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+          TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+          TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+        }
+      end,
+      theme = 'dragon',
+      background = {
+        dark = 'dragon',
+        light = 'lotus',
+      },
     },
     config = function(_, opts)
       require('kanagawa').setup(opts)
-      vim.cmd('colorscheme kanagawa-dragon')
+      vim.cmd('colorscheme kanagawa')
     end,
   },
   {
