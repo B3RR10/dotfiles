@@ -5,11 +5,9 @@ return {
       { '<C-p>', '<Cmd>NvimTreeToggle<CR>', desc = 'Toggle neovim-tree' },
     },
     opts = {
-      update_cwd = true,
-      update_focused_file = {
-        enable = true,
-        ignore_list = { '.git', 'node_modules', '.cache' },
-      },
+      sync_root_with_cwd = true,
+      hijack_unnamed_buffer_when_opening = true,
+      select_prompts = true,
       view = {
         width = '25%',
         number = true,
@@ -17,8 +15,18 @@ return {
       },
       renderer = {
         group_empty = true,
+        highlight_git = 'name',
         highlight_opened_files = 'name',
-        highlight_git = true,
+      },
+      update_focused_file = {
+        enable = true,
+        update_root = {
+          enable = true,
+          ignore_list = { '.git', 'node_modules', '.cache' },
+        },
+      },
+      filters = {
+        git_ignored = false,
       },
       actions = {
         open_file = {
