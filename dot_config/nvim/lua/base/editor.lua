@@ -222,6 +222,11 @@ return {
           enabled = true,
         },
       },
+      modes = {
+        search = {
+          enabled = true,
+        },
+      },
     },
     -- stylua: ignore
     keys = {
