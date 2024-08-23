@@ -125,6 +125,9 @@ return {
     end,
   },
   {
+    'tpope/vim-fugitive',
+  },
+  {
     'RRethy/vim-illuminate',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = {
