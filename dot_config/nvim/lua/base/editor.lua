@@ -126,6 +126,7 @@ return {
   },
   {
     'tpope/vim-fugitive',
+    event = 'VeryLazy',
   },
   {
     'RRethy/vim-illuminate',
