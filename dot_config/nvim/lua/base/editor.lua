@@ -127,6 +127,9 @@ return {
   {
     'tpope/vim-fugitive',
     event = 'VeryLazy',
+    keys = {
+      { '<Leader>gg', '<Cmd>Git<CR>', desc = 'Fugitive' },
+    },
   },
   {
     'RRethy/vim-illuminate',
@@ -250,13 +253,6 @@ return {
     'stevearc/dressing.nvim',
     event = 'VeryLazy',
     opts = {},
-  },
-  {
-    'kdheepak/lazygit.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    keys = {
-      { '<Leader>gg', '<Cmd>LazyGit<CR>', desc = 'LazyGit' },
-    },
   },
   {
     'folke/which-key.nvim',
