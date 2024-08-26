@@ -125,11 +125,21 @@ return {
     end,
   },
   {
+    'NeogitOrg/neogit',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    config = true,
+    keys = {
+      { '<Leader>gg', '<Cmd>Neogit<CR>', desc = 'Fugitive' },
+    },
+  },
+  {
     'tpope/vim-fugitive',
     event = 'VeryLazy',
-    keys = {
-      { '<Leader>gg', '<Cmd>Git<CR>', desc = 'Fugitive' },
-    },
   },
   {
     'RRethy/vim-illuminate',
