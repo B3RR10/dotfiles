@@ -125,16 +125,10 @@ return {
     end,
   },
   {
-    'NeogitOrg/neogit',
-    event = 'VeryLazy',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'sindrets/diffview.nvim',
-      'nvim-telescope/telescope.nvim',
-    },
-    config = true,
+    'kdheepak/lazygit.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { '<Leader>gg', '<Cmd>Neogit<CR>', desc = 'Fugitive' },
+      { '<Leader>gg', '<Cmd>LazyGit<CR>', desc = 'LazyGit' },
     },
   },
   {
