@@ -156,6 +156,12 @@ return {
     end,
   },
   {
+    'andythigpen/nvim-coverage',
+    deps = { 'nvim-lua/plenary.nvim' },
+    event = 'VeryLazy',
+    config = true,
+  },
+  {
     'anuvyklack/hydra.nvim',
     opts = {
       specs = {
