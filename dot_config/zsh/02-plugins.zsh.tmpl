@@ -5,7 +5,7 @@ source $ZNAP_HOME/znap.zsh
 
 znap source ohmyzsh/ohmyzsh \
     lib/{git,key-bindings} \
-    plugins/{colored-man-pages,{{- if eq .chezmoi.os "darwin" }}brew,{{- end}}direnv,fzf,git,git-extras,kubectl,rsync,terraform}
+    plugins/{ansible,colored-man-pages,{{- if eq .chezmoi.os "darwin" }}brew,{{- end}}direnv,fzf,git,git-extras,kubectl,opentofu,rsync}
 
 znap source Aloxaf/fzf-tab
 # set case insensitive and partial completion
