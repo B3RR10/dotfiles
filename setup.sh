@@ -15,4 +15,5 @@ if [ ! -d "$HOME/.local/share/chezmoi" ]; then
 	chezmoi init --apply https://github.com/B3RR10/dotfiles.git
 else
 	chezmoi update --force
+	chezmoi init --apply
 fi
