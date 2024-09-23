@@ -12,7 +12,7 @@ mkdir -p "$LOCAL_BIN"
 which chezmoi >/dev/null 2>&1 || sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 
 if [ ! -d "$HOME/.local/share/chezmoi" ]; then
-	chezmoi init --apply https://github.com/B3RR10/dotfiles.git --promptDefaults
+	chezmoi init --apply https://github.com/B3RR10/dotfiles.git
 else
 	chezmoi update --force
 fi

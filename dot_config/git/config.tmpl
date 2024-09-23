@@ -5,7 +5,7 @@
 [branch]
     autoSetupRebase = always
 [commit]
-{{- if .git.sign_commits }}
+{{- if ne .git.signing_key "" }}
     gpgsign = true
 {{- end }}
     template = ~/.config/git/commit-message
@@ -70,8 +70,8 @@
     autoUpdate = true
     enable = true
 [user]
+    name = {{ .git.name | quote }}
     email = {{ .git.email | quote }}
-    name = Miguel Berrio
-{{- if .git.sign_commits }}
-    signingkey = A9FDFA72
+{{- if ne .git.signing_key "" }}
+    signingkey = {{ .git.signing_key | quote }}
 {{- end }}
