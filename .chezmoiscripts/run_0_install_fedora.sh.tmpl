@@ -2,23 +2,13 @@
 #!/bin/bash
 
 {{- $packages := list
-    "containerd.io"
     "dnf-plugins-core"
     "dnf-utils"
-    "docker-buildx-plugin"
-    "docker-ce"
-    "docker-ce-cli"
-    "docker-compose-plugin"
     "icu"
     "libicu"
     "zsh"
 }}
 
 # Add docker repository
-{{ .sudo -}}dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-
 {{ .sudo -}}dnf install -y {{ $packages | join " " }}
-
-{{ .sudo -}}systemctl enable --now docker.service
-
 {{- end }}
