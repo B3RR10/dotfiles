@@ -1,6 +1,6 @@
 {{- $git_name        := eq (env "GIT_NAME") "" | ternary "Miguel Berrio" (env "GIT_NAME") -}}
 {{- $git_email       := eq (env "GIT_EMAIL") "" | ternary "mail@berrio.dev" (env "GIT_EMAIL") -}}
-{{- $git_signing_key := eq (env "GIT_SIGNING_KEY") "" | ternary "A9FDFA72" (env "GIT_SIGNING_KEY") -}}
+{{- $git_signing_key := eq (env "GIT_SIGNING_KEY") "" | ternary "" (env "GIT_SIGNING_KEY") -}}
 
 [data]
 sudo = "{{ if ne .chezmoi.uid "0" }}sudo {{ end }}"
