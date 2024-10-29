@@ -249,6 +249,10 @@ return {
     },
   },
   {
+    'tpope/vim-unimpaired',
+    event = 'VeryLazy',
+  },
+  {
     'norcalli/nvim-colorizer.lua',
     event = 'VeryLazy',
     config = true,
