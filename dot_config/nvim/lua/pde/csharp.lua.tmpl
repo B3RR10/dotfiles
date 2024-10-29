@@ -36,22 +36,6 @@ return {
               ['textDocument/definition'] = require('omnisharp_extended').handler,
             },
             cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) },
-
-            settings = {
-              FormattingOptions = {
-                EnableEditorConfigSupport = true,
-                OrganizeImports = true,
-              },
-              RoslynExtensionsOptions = {
-                EnableAnalyzersSupport = true,
-                EnableImportCompletion = true,
-              },
-              RenameOptions = {
-                RenameInComments = true,
-                RenameInStrings = true,
-                RenameOverloads = true,
-              },
-            },
           },
         }
       end,
