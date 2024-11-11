@@ -156,12 +156,12 @@ return {
   },
   {
     'rmagatti/auto-session',
-    event = 'VimEnter',
+    lazy = false,
     opts = {
+      auto_create = false,
+      auto_restore = true,
+      auto_save = true,
       log_level = 'error',
-      auto_save_enabled = true,
-      auto_restore_enabled = true,
-      auto_session_create_enabled = false,
     },
   },
   {
