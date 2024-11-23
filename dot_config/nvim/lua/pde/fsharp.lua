@@ -20,6 +20,17 @@ return {
     end,
   },
   {
+    'neovim/nvim-lspconfig',
+    opts = {
+      servers = {
+        fsautocomplete = {
+          mason = false,
+          ignore = true,
+        },
+      },
+    },
+  },
+  {
     'ionide/Ionide-vim',
     ft = { 'fsharp' },
   },

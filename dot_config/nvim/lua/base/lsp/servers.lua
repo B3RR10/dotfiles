@@ -61,6 +61,9 @@ function M.setup(_, opts)
         return
       end
     end
+    if server_opts.ignore == true then
+      return
+    end
     require('lspconfig')[server].setup(server_opts)
   end
 
