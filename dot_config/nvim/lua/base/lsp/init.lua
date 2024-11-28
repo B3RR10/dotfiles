@@ -32,8 +32,7 @@ return {
     build = ':MasonUpdate',
     cmd = 'Mason',
     opts = {
-      ensure_installed = {
-        'shfmt',
+      ensure_installed = {},
       },
     },
     config = function(_, opts)
@@ -61,6 +60,7 @@ return {
     opts = function()
       return {
         root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
+        sources = {},
       }
     end,
   },
