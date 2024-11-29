@@ -1,3 +1,35 @@
 snippet note "Add note for presentation"
 	\note{${1}}
 	${2}
+
+snippet brief "Add DE letter boilerplate"
+	\documentclass[12pt,a4paper]{dinbrief}
+	\usepackage{inputenc}
+	\usepackage{ngerman}
+
+	\nowindowrules%
+	\address{
+		Miguel Berrio Velez\\
+		Münzstr. 41\\
+		48143 Münster}
+	\backaddress{ M. Berrio, Münzstr. 41, 48143 Münster}
+	\signature{Miguel Berrio Velez}
+	\place{Münster}
+	\date{\today}
+	\centeraddress%
+
+	\begin{document}
+	\begin{letter} {
+			Firmenname \\
+			Musterstr. 1 \\
+			48155 Münster}
+		\subject{Subject}
+		\opening{Sehr geehrte Damen und Herren,}
+
+		CONTENT
+
+		\closing{Ich bedanke mich im Voraus und verbleibe mit freundlichen Grüßen,}
+	\end{letter}
+	\end{document}
+
+	% vim: tw=2
