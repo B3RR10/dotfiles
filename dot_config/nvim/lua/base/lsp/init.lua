@@ -32,6 +32,8 @@ return {
     cmd = 'Mason',
     opts = {
       ensure_installed = {},
+      registries = {
+        'github:mason-org/mason-registry',
       },
     },
     config = function(_, opts)
