@@ -62,22 +62,14 @@ return {
               },
             },
           },
-        },
-      },
-      setup = {
-        lua_ls = function(_, _)
-          local lsp_utils = require('base.lsp.utils')
-          lsp_utils.on_attach(function(client, buffer)
+          capabilities = require('base.lsp.utils').capabilities(),
+          on_attach = function(_, bufnr)
             -- stylua: ignore start
-            if client.name == "lua_ls" then
-              vim.keymap.set("n", "<leader>dX", function() require("osv").run_this() end,
-                { buffer = buffer, desc = "OSV Run" })
-              vim.keymap.set("n", "<leader>dL", function() require("osv").launch({ port = 8086 }) end,
-                { buffer = buffer, desc = "OSV Launch" })
-            end
+            vim.keymap.set('n', '<leader>dX', function() require('osv').run_this() end, { buffer = bufnr, desc = 'OSV Run' })
+            vim.keymap.set('n', '<leader>dL', function() require('osv').launch({ port = 8086 }) end, { buffer = bufnr, desc = 'OSV Launch' })
             -- stylua: ignore end
-          end)
-        end,
+          end,
+        },
       },
     },
   },

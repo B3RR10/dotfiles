@@ -62,14 +62,7 @@ return {
               },
             },
           },
-        },
-        taplo = {},
-      },
-      setup = {
-        rust_analyzer = function(_, opts)
-          local codelldb_path, liblldb_path = get_codelldb()
-          local lsp_utils = require('base.lsp.utils')
-          lsp_utils.on_attach(function(client, bufnr)
+          on_attach = function(client, bufnr)
             local map = function(mode, lhs, rhs, desc)
               if desc then
                 desc = desc
@@ -83,7 +76,13 @@ return {
               map("n", "<leader>lt", "<cmd>Cargo test<cr>", "Cargo test" )
               map("n", "<leader>lR", "<cmd>Cargo run<cr>", "Cargo run" )
             end
-          end)
+          end,
+        },
+        taplo = {},
+      },
+      setup = {
+        rust_analyzer = function(opts)
+          local codelldb_path, liblldb_path = get_codelldb()
 
           vim.api.nvim_create_autocmd({ 'BufEnter' }, {
             pattern = { 'Cargo.toml' },
@@ -175,9 +174,6 @@ return {
             executable = {
               command = codelldb_path,
               args = { '--port', '${port}' },
-
-              -- On windows you may have to uncomment this:
-              -- detached = false,
             },
           }
           dap.configurations.cpp = {

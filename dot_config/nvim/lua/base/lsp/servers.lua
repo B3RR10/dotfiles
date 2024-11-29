@@ -36,60 +36,32 @@ local function lsp_init()
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, config.float)
 end
 
-function M.setup(_, opts)
-  lsp_utils.on_attach(function(client, bufnr)
+local function setup(server, opts, setup)
+  local on_attach = function(client, bufnr)
     require('base.lsp.format').on_attach(client, bufnr)
     require('base.lsp.keymaps').on_attach(client, bufnr)
-  end)
+    if opts['on_attach'] then
+      opts.on_attach(client, bufnr)
+    end
+    vim.notify_once('Attached to LSP server: ' .. server, vim.log.levels.INFO)
+  end
+  local client_opts = vim.tbl_deep_extend('keep', {
+    capabilities = lsp_utils.capabilities(),
+    on_attach = on_attach,
+  }, opts or {})
 
+  if setup then
+    pcall(setup, opts)
+  end
+
+  require('lspconfig')[server].setup(client_opts)
+end
+
+function M.setup(_, opts)
   lsp_init() -- diagnostics, handlers
 
-  local servers = opts.servers
-  local capabilities = lsp_utils.capabilities()
-
-  local function setup(server)
-    local server_opts = vim.tbl_deep_extend('force', {
-      capabilities = capabilities,
-    }, servers[server] or {})
-
-    if opts.setup[server] then
-      if opts.setup[server](server, server_opts) then
-        return
-      end
-    elseif opts.setup['*'] then
-      if opts.setup['*'](server, server_opts) then
-        return
-      end
-    end
-    if server_opts.ignore == true then
-      return
-    end
-    require('lspconfig')[server].setup(server_opts)
-  end
-
-  -- get all the servers that are available through mason-lspconfig
-  local have_mason, mlsp = pcall(require, 'mason-lspconfig')
-  local all_mslp_servers = {}
-  if have_mason then
-    all_mslp_servers = vim.tbl_keys(require('mason-lspconfig.mappings.server').lspconfig_to_package)
-  end
-
-  local ensure_installed = {} ---@type string[]
-  for server, server_opts in pairs(servers) do
-    if server_opts then
-      server_opts = server_opts == true and {} or server_opts
-      -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-      if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-        setup(server)
-      else
-        ensure_installed[#ensure_installed + 1] = server
-      end
-    end
-  end
-
-  if have_mason then
-    mlsp.setup({ ensure_installed = ensure_installed })
-    mlsp.setup_handlers({ setup })
+  for server, server_opts in pairs(opts.servers) do
+    setup(server, server_opts, opts.setup[server] or nil)
   end
 end
 

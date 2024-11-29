@@ -88,41 +88,34 @@ return {
               semanticTokens = true,
             },
           },
-        },
-        golangci_lint_ls = {},
-      },
-      setup = {
-        gopls = function(_, _)
-          local lsp_utils = require('base.lsp.utils')
-          lsp_utils.on_attach(function(client, bufnr)
+          on_attach = function(client, bufnr)
             local map = function(mode, lhs, rhs, desc)
               if desc then
                 desc = desc
               end
               vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
             end
-            -- stylua: ignore
-            if client.name == "gopls" then
-              map("n", "<leader>ly", "<cmd>GoModTidy<cr>", "Go Mod Tidy")
-              map("n", "<leader>lc", "<cmd>GoCoverage<Cr>", "Go Test Coverage")
-              map("n", "<leader>lt", "<cmd>GoTest<Cr>", "Go Test")
-              map("n", "<leader>lR", "<cmd>GoRun<Cr>", "Go Run")
-              map("n", "<leader>dT", "<cmd>lua require('dap-go').debug_test()<cr>", "Go Debug Test")
 
-              if not client.server_capabilities.semanticTokensProvider then
-                local semantic = client.config.capabilities.textDocument.semanticTokens
-                client.server_capabilities.semanticTokensProvider = {
-                  full = true,
-                  legend = {
-                    tokenTypes = semantic.tokenTypes,
-                    tokenModifiers = semantic.tokenModifiers,
-                  },
-                  range = true,
-                }
-              end
+            map('n', '<leader>ly', '<cmd>GoModTidy<cr>', 'Go Mod Tidy')
+            map('n', '<leader>lc', '<cmd>GoCoverage<Cr>', 'Go Test Coverage')
+            map('n', '<leader>lt', '<cmd>GoTest<Cr>', 'Go Test')
+            map('n', '<leader>lR', '<cmd>GoRun<Cr>', 'Go Run')
+            map('n', '<leader>dT', "<cmd>lua require('dap-go').debug_test()<cr>", 'Go Debug Test')
+
+            if not client.server_capabilities.semanticTokensProvider then
+              local semantic = client.config.capabilities.textDocument.semanticTokens
+              client.server_capabilities.semanticTokensProvider = {
+                full = true,
+                legend = {
+                  tokenTypes = semantic.tokenTypes,
+                  tokenModifiers = semantic.tokenModifiers,
+                },
+                range = true,
+              }
             end
-          end)
-        end,
+          end,
+        },
+        golangci_lint_ls = {},
       },
     },
   },
