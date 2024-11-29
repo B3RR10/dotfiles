@@ -9,9 +9,10 @@
     gpgsign = true
 {{- end }}
     template = ~/.config/git/commit-message
+    verbose = true
 [core]
     pager = delta
-    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    whitespace = fix,space-before-tab,-indent-with-non-tab,trailing-space,cr-at-eol
     bare = false
 [delta]
     features = line-numbers decorations
