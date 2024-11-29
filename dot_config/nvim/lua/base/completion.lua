@@ -15,7 +15,6 @@ return {
       local cmp = require('cmp')
       local lspkind = require('lspkind')
       local luasnip = require('luasnip')
-      local compare = require('cmp.config.compare')
       local source_names = {
         copilot = '[Copilot]',
         buffer = '[Buffer]',
@@ -28,19 +27,6 @@ return {
       return {
         completion = {
           completeopt = 'menu,menuone,noselect',
-        },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            compare.score,
-            compare.recently_used,
-            compare.offset,
-            compare.exact,
-            compare.kind,
-            compare.sort_text,
-            compare.length,
-            compare.order,
-          },
         },
         snippet = {
           expand = function(args)
@@ -62,8 +48,6 @@ return {
           ['<Tab>'] = cmp.mapping(function(fallback)
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
-              -- elseif cmp.visible() then
-              --   cmp.select_next_item()
             else
               fallback()
             end
@@ -71,8 +55,6 @@ return {
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
               luasnip.jump(-1)
-              -- elseif cmp.visible() then
-              --   cmp.select_prev_item()
             else
               fallback()
             end
@@ -94,8 +76,7 @@ return {
           }),
         },
         experimental = {
-          hl_group = 'LspCodeLens',
-          ghost_text = {},
+          ghost_text = false,
         },
         window = {
           documentation = {
@@ -109,7 +90,7 @@ return {
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
-    event = 'InsertEnter',
+    event = 'LspAttach',
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
