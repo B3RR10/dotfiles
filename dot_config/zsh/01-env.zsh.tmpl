@@ -37,8 +37,8 @@ export FZF_ALT_C_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {
 export GRAB_HOME=$HOME/src
 
 # History
-[ -z "$HISTFILE" ] && HISTFILE="$XDG_CACHE_HOME/zsh/history"
-[ ! -d $(dirname $HISTFILE) ] && mkdir -p $(dirname $HISTFILE)
+export HISTFILE="$XDG_CACHE_HOME/zsh/history"
+[ ! -d "$(dirname $HISTFILE)" ] && mkdir -p "$(dirname $HISTFILE)"
 export HISTSIZE=10000
 export SAVEHIST=10000
 
