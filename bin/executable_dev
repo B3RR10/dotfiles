@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# First create the panes
+tmux split-window -h -p 25
+tmux split-window -v btm
+tmux select-pane -t 2
+tmux select-pane -t 1
+
+# and open neovim
+tmux send-keys 'nvim' Enter
+tmux display-message "Dev Environment in $(pwd)"

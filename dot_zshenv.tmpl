@@ -2,10 +2,12 @@ export LANG="en_US.UTF-8"
 
 # bin dirs
 local_bin="$HOME/.local/bin"
-export PATH="$PATH:$local_bin"
 if [ ! -d "$local_bin" ]; then
     mkdir -p "$local_bin"
 fi
+
+export PATH="$local_bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # Directories
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
