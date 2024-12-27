@@ -60,8 +60,8 @@ return {
     event = 'VeryLazy',
     opts = {
       defaults = {
-        ['<leader>t'] = { name = '+Test' },
-        ['<leader>tt'] = { name = '+Task' },
+        { '<leader>t', group = 'Test' },
+        { '<leader>tt', group = 'Task' },
       },
     },
   },

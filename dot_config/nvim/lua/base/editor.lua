@@ -286,9 +286,9 @@ return {
       },
       defaults = {
         mode = { 'n', 'v' },
-        ['<Leader>f'] = { name = '+File' },
-        ['<Leader>h'] = { name = '+Harpoon' },
-        ['<Leader>g'] = { name = '+Git' },
+        { '<Leader>f', group = 'File' },
+        { '<Leader>g', group = 'Git' },
+        { '<Leader>h', group = 'Harpoon' },
       },
     },
     config = function(_, opts)
