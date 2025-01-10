@@ -38,6 +38,14 @@ return {
     'hoob3rt/lualine.nvim',
     dependencies = {
       'AndreM222/copilot-lualine',
+      {
+        'SmiteshP/nvim-navic',
+        opts = {
+          lsp = {
+            auto_attach = true,
+          },
+        },
+      },
     },
     event = 'VeryLazy',
     opts = function()
@@ -78,6 +86,8 @@ return {
         end
       end
 
+      local navic = require('nvim-navic')
+
       return {
         options = {
           icons_enabled = true,
@@ -96,6 +106,14 @@ return {
           },
           lualine_c = {
             { 'filename', fmt = trunc(100, 30, nil, false) },
+            {
+              function()
+                return navic.get_location()
+              end,
+              cond = function()
+                return navic.is_available()
+              end,
+            },
           },
           lualine_x = {
             'copilot',
