@@ -25,7 +25,11 @@ opt.cursorline = true
 opt.cursorlineopt = 'number'
 opt.encoding = 'utf-8'
 opt.expandtab = true
-opt.foldcolumn = '0'
+opt.foldclose = 'all'
+opt.foldcolumn = 'auto'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldmethod = 'expr'
+opt.foldnestmax = 5
 opt.formatoptions:remove('o')
 opt.formatoptions:remove('t')
 opt.hidden = true
