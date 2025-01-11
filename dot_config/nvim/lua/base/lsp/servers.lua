@@ -48,6 +48,9 @@ local function setup(server, opts, setup)
   local client_opts = vim.tbl_deep_extend('keep', {
     capabilities = lsp_utils.capabilities(),
     on_attach = on_attach,
+    root_dir = function()
+      return vim.loop.cwd()
+    end,
   }, opts or {})
 
   if setup then
