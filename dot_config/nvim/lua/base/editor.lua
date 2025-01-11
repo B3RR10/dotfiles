@@ -339,4 +339,12 @@ return {
       })
     end,
   },
+  {
+    'zk-org/zk-nvim',
+    ft = 'markdown',
+    lazy = false,
+    config = function()
+      require('zk').setup({})
+    end,
+  },
 }
