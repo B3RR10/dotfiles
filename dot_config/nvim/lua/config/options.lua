@@ -29,7 +29,7 @@ opt.foldclose = 'all'
 opt.foldcolumn = 'auto'
 opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 opt.foldmethod = 'expr'
-opt.foldnestmax = 5
+opt.foldnestmax = 3
 opt.formatoptions:remove('o')
 opt.formatoptions:remove('t')
 opt.hidden = true
