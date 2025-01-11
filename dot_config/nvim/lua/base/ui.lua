@@ -38,14 +38,6 @@ return {
     'hoob3rt/lualine.nvim',
     dependencies = {
       'AndreM222/copilot-lualine',
-      {
-        'SmiteshP/nvim-navic',
-        opts = {
-          lsp = {
-            auto_attach = true,
-          },
-        },
-      },
     },
     event = 'VeryLazy',
     opts = function()
@@ -86,8 +78,6 @@ return {
         end
       end
 
-      local navic = require('nvim-navic')
-
       return {
         options = {
           icons_enabled = true,
@@ -100,26 +90,18 @@ return {
         sections = {
           lualine_a = { 'mode', isSession },
           lualine_b = {
-            { 'b:gitsigns_head', icon = '', fmt = trunc(150, 20, 80, false) },
+            { 'b:gitsigns_head', icon = '', fmt = trunc(1000, 20, 80, false) },
             { 'diff', source = diff_sources },
             { 'diagnostics', sources = { 'nvim_lsp' } },
           },
           lualine_c = {
             { 'filename', fmt = trunc(100, 30, nil, false) },
-            {
-              function()
-                return navic.get_location()
-              end,
-              cond = function()
-                return navic.is_available()
-              end,
-            },
           },
           lualine_x = {
             'copilot',
             { require('lazy.status').updates, cond = require('lazy.status').has_updates, color = { fg = 'ff9e64' } },
             'searchcount',
-            'encoding',
+            { 'encoding', show_bomb = true },
             'fileformat',
             'filetype',
           },
@@ -135,7 +117,8 @@ return {
           lualine_z = {},
         },
         tabline = {},
-        extensions = { 'fzf', 'nvim-tree', 'quickfix', 'fugitive' },
+        winbar = {},
+        extensions = { 'fugitive', 'fzf', 'lazy', 'mason', 'nvim-tree', 'quickfix' },
       }
     end,
   },
@@ -159,6 +142,10 @@ return {
         sort_by = 'extension',
       },
     },
+  },
+  {
+    'Bekaboo/dropbar.nvim',
+    event = 'VeryLazy',
   },
   { 'nvim-tree/nvim-web-devicons' },
 }
