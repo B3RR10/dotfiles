@@ -145,7 +145,7 @@ return {
   },
   {
     'Bekaboo/dropbar.nvim',
-    event = 'VeryLazy',
+    event = 'BufWinEnter',
   },
   { 'nvim-tree/nvim-web-devicons' },
 }
