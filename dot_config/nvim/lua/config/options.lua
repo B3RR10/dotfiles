@@ -48,8 +48,7 @@ opt.listchars = {
 opt.number = true
 opt.relativenumber = true
 opt.scrolloff = 5
-opt.sessionoptions:append('localoptions')
-opt.sessionoptions:remove('blank')
+opt.sessionoptions = 'buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 opt.shiftwidth = 0
 opt.shortmess:append('n')
 opt.showbreak = '> '
