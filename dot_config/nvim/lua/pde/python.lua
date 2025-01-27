@@ -16,11 +16,9 @@ return {
     'williamboman/mason.nvim',
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
-        'autopep8',
-        'flake8',
-        'isort',
-        'pyright',
-        'yapf',
+        'black',
+        'python-lsp-server',
+        'ruff',
       })
     end,
   },
@@ -29,10 +27,8 @@ return {
     opts = function(_, opts)
       local nls = require('null-ls')
       vim.list_extend(opts.sources, {
-        nls.builtins.diagnostics.flake8,
-        nls.builtins.formatting.autopep8,
-        nls.builtins.formatting.isort,
-        nls.builtins.formatting.yapf,
+        nls.builtins.diagnostics.ruff,
+        nls.builtins.formatting.black,
       })
     end,
   },
@@ -40,7 +36,17 @@ return {
     'neovim/nvim-lspconfig',
     opts = {
       servers = {
-        pyright = {},
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pycodestyle = {
+                  maxLineLength = 100,
+                },
+              },
+            },
+          },
+        },
       },
     },
   },
