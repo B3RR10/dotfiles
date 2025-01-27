@@ -42,7 +42,8 @@ return {
         { '<Leader>ff', function() find_files_from_project_git_root() end, desc = 'Find Files in current git project', },
         { '<Leader>fF', function() builtin.find_files({ cwd = '~/' }) end, desc = 'Find Files in ~', },
         { '<Leader>fs', function() builtin.find_files({ cwd = vim.fn.expand('%:p:h') }) end, desc = 'Find Sibling files' },
-        { '<Leader><Leader>', function() builtin.help_tags() end, desc = 'Fzf builtin commands', },
+        { '<Leader><Leader>', function() builtin.builtin() end, desc = 'Fzf builtin commands', },
+        { '<Leader>fc', function() builtin.commands() end, desc = 'Fzf nvim commands' },
         { '<Leader>fr', function() live_grep_from_project_git_root() end, desc = 'Fzf RG', },
       }
     end,
