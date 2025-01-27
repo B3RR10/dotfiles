@@ -162,6 +162,7 @@ return {
       auto_restore = true,
       auto_save = true,
       log_level = 'error',
+      use_git_branch = true,
     },
   },
   {
