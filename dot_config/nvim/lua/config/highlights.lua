@@ -1,6 +1,6 @@
--- Highlight column 101 to warn for longer lines
+-- Highlight column 120 to warn for longer lines
 vim.cmd('highlight OverLength ctermbg=red ctermfg=white guibg=#870000')
-vim.cmd([[let w:m2=matchadd('OverLength', '\%101v', -1)]])
+vim.cmd([[let w:m2=matchadd('OverLength', '\%121v', -1)]])
 
 -- Match trailing spaces
 vim.cmd([[match ErrorMsg '\s\+$']])
