@@ -3,9 +3,11 @@
 
 source $ZNAP_HOME/znap.zsh
 
+eval "$(pyenv init --path)"
+
 znap source ohmyzsh/ohmyzsh \
     lib/{git,key-bindings} \
-    plugins/{ansible,colored-man-pages,{{- if eq .chezmoi.os "darwin" }}brew,{{- end}}direnv,fzf,git,git-extras,kubectl,opentofu,rsync}
+    plugins/{ansible,colored-man-pages,brew,direnv,fzf,git,git-extras,kubectl,nvm,opentofu,pyenv,rsync}
 
 znap source Aloxaf/fzf-tab
 # set case insensitive and partial completion

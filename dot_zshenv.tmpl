@@ -35,6 +35,10 @@ elif [ -d /usr/local/share/dotnet/sdk ]; then
     export PATH="$PATH:$DOTNET_ROOT"
 fi
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT:$PATH"
+
 # Znap
 export ZNAP_HOME=$XDG_DATA_HOME/znap/znap
 
