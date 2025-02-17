@@ -21,3 +21,6 @@ map('', 'Y', 'y$')
 
 -- Close preview window
 map('', '<Leader>p', ':pclose<CR>', { silent = true })
+
+-- nohlsearch
+map('n', '<Esc>', ':noh<CR>', { silent = true })
