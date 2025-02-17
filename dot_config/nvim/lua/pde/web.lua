@@ -1,20 +1,5 @@
 return {
   {
-    'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        'css',
-        'jq',
-        'json',
-        'json5',
-        'jsonc',
-        'html',
-        'scss',
-        'yaml',
-      })
-    end,
-  },
-  {
     'mason.nvim',
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {

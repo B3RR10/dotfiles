@@ -1,3 +1,14 @@
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    local parsers = require('nvim-treesitter.parsers')
+    local lang = parsers.get_buf_lang()
+    if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) then
+      vim.notify('Installing TS grammar for: ' .. lang)
+      vim.cmd.TSInstall(lang)
+    end
+  end,
+})
+
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -6,35 +17,11 @@ return {
       { 'JoosepAlviste/nvim-ts-context-commentstring', opts = {} },
     },
     build = ':TSUpdate',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufRead', 'BufNewFile' },
     opts = {
       sync_install = false,
-      ensure_installed = {
-        'diff',
-        'git_config',
-        'git_rebase',
-        'gitattributes',
-        'gitcommit',
-        'gitignore',
-        'ini',
-        'make',
-        'regex',
-        'rst',
-        'sql',
-      },
       highlight = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = 'gnn',
-          node_incremental = 'grn',
-          scope_incremental = 'grc',
-          node_decremental = 'grm',
-        },
-      },
-      indent = {
-        enable = true,
-      },
+      indent = { enable = true },
       textobjects = {
         move = {
           enable = true,
@@ -64,17 +51,6 @@ return {
       },
     },
     config = function(_, opts)
-      if type(opts.ensure_installed) == 'table' then
-        --@type table<string, boolean>
-        local added = {}
-        opts.ensure_installed = vim.tbl_filter(function(lang)
-          if added[lang] then
-            return false
-          end
-          added[lang] = true
-          return true
-        end, opts.ensure_installed)
-      end
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
