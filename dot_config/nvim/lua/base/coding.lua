@@ -1,10 +1,5 @@
 return {
   {
-    'echasnovski/mini.comment',
-    event = 'BufReadPost',
-    opts = {},
-  },
-  {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {
