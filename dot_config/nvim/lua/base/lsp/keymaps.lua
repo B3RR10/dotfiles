@@ -47,7 +47,6 @@ function M:map(lhs, rhs, opts)
     opts.mode or 'n',
     lhs,
     type(rhs) == 'string' and ('<cmd>%s<cr>'):format(rhs) or rhs,
-    ---@diagnostic disable-next-line: no-unknown
     { silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
   )
 end

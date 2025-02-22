@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('LspProgress', {
       title = 'LSP Progress',
       opts = function(notif)
         notif.icon = event.data.params.value.kind == 'end' and ' '
-          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+            or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
       end,
     })
   end,
@@ -26,24 +26,28 @@ return {
     },
     picker = {
       enabled = true,
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = 100,
+        },
+      },
+      jump = {
+        reuse_win = true,
+      },
+      sources = {
+        buffers = {
+          current = false,
+        },
+        explorer = {
+          auto_close = true,
+          jump = { close = true },
+        },
+      },
       win = {
         input = {
           keys = {
             ['<Esc>'] = { 'close', mode = { 'i', 'n' } },
-          },
-        },
-      },
-      sources = {
-        explorer = {
-          auto_close = true,
-          jump = { close = true },
-          win = {
-            list = {
-              keys = {
-                ['<C-p>'] = 'close',
-                ['o'] = 'confirm',
-              },
-            },
           },
         },
       },
@@ -108,10 +112,10 @@ return {
       { '<leader>fc',       function() Snacks.picker.commands() end,                              desc = 'Find Neovim commands' },
       { '<leader>fr',       function() live_grep_from_project_git_root() end,                     desc = 'Grep' },
 
-      { '<leader>z',  function() Snacks.zen() end,                   desc = 'Toggle Zen Mode' },
-      { '<leader>Z',  function() Snacks.zen.zoom() end,              desc = 'Toggle Zoom Mode' },
-      { '<leader>ns', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
-      { '<leader>nh', function() Snacks.notifier.hide() end,         desc = 'Dismiss All Notification' },
+      { '<leader>z',        function() Snacks.zen() end,                                          desc = 'Toggle Zen Mode' },
+      { '<leader>Z',        function() Snacks.zen.zoom() end,                                     desc = 'Toggle Zoom Mode' },
+      { '<leader>ns',       function() Snacks.notifier.show_history() end,                        desc = 'Notification History' },
+      { '<leader>nh',       function() Snacks.notifier.hide() end,                                desc = 'Dismiss All Notification' },
 
       {
         '<leader>N',

@@ -1,59 +1,59 @@
 snippet cwp "Console.WriteLine with parameters"
-  Console.WriteLine($"${1:var}: {${2:$1}}");$0
+	Console.WriteLine($"${1:var}: {${2:$1}}");$0
 
 snippet nsetup "NUnit Setup" b
-  [SetUp]
-  public void SetUp()
-  {
-    ${0}
-  }
+	[SetUp]
+	public void SetUp()
+	{
+		${0}
+	}
 
 snippet nteardown "NUnit Teardown" b
-  [TearDown]
-  public void TearDown()
-  {
-    ${0}
-  }
+	[TearDown]
+	public void TearDown()
+	{
+		${0}
+	}
 
 snippet test "NUnit Test Case" b
-  [Test]
-  public void ${1:function_name}()
-  {
-    // Arrange
-    ${0}
-    // Act
+	[Test]
+	public void ${1:function_name}()
+	{
+		// Arrange
+		${0}
+		// Act
 
-    // Assert
+		// Assert
 
-  }
+	}
 
 snippet atest "NUnit Async Test Case" b
-  [Test]
-  public async Task ${1:function_name}()
-  {
-    // Arrange
-    ${0}
-    // Act
+	[Test]
+	public async Task ${1:function_name}()
+	{
+		// Arrange
+		${0}
+		// Act
 
-    // Assert
+		// Assert
 
-  }
+	}
 
 
 snippet nfixture "NUnit test class" b
-  using NUnit.Framework;
+	using NUnit.Framework;
 
-  namespace ${1:Namespace}
-  {
-    public class ${2:Class}
-    {
-      ${0}
-    }
-  }
+	namespace ${1:Namespace}
+	{
+		public class ${2:Class}
+		{
+			${0}
+		}
+	}
 
 snippet region "#region #endregion" b
-  #region ${1:Region}
+	#region ${1:Region}
 
-  ${VISUAL}$0
+	${VISUAL}$0
 
-  #endregion $1
+	#endregion $1

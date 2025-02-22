@@ -1,0 +1,5 @@
+snippet task "Add a task with id"
+	- [ ] `system("openssl rand -hex 2 | tr '[a-z]' '[A-Z]' | xargs echo -n")` $0
+
+snippet id "Generate task id"
+	`system("openssl rand -hex 2 | tr '[a-z]' '[A-Z]' | xargs echo -n")`

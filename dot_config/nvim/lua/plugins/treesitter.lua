@@ -1,14 +1,3 @@
-vim.api.nvim_create_autocmd('FileType', {
-  callback = function()
-    local parsers = require('nvim-treesitter.parsers')
-    local lang = parsers.get_buf_lang()
-    if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) then
-      vim.notify('Installing TS grammar for: ' .. lang)
-      vim.cmd.TSInstall(lang)
-    end
-  end,
-})
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
@@ -20,6 +9,54 @@ return {
     event = { 'BufRead', 'BufNewFile' },
     opts = {
       sync_install = false,
+      ensure_installed = {
+        'bash',
+        'c_sharp',
+        'comment',
+        'css',
+        'diff',
+        'dockerfile',
+        'fsharp',
+        'go',
+        'gomod',
+        'gosum',
+        'gowork',
+        'graphql',
+        'hcl',
+        'helm',
+        'html',
+        'http',
+        'ini',
+        'jq',
+        'json',
+        'json',
+        'json5',
+        'jsonc',
+        'latex',
+        'lua',
+        'luadoc',
+        'luap',
+        'make',
+        'markdown',
+        'markdown_inline',
+        'ninja',
+        'python',
+        'query',
+        'regex',
+        'ron',
+        'rst',
+        'rust',
+        'scss',
+        'sql',
+        'ssh_config',
+        'templ',
+        'terraform',
+        'toml',
+        'vim',
+        'vimdoc',
+        'xml',
+        'yaml',
+      },
       highlight = { enable = true },
       indent = { enable = true },
       textobjects = {

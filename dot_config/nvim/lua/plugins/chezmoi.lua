@@ -1,5 +1,6 @@
 return {
   'xvzc/chezmoi.nvim',
+  lazy = false,
   dependencies = { 'nvim-lua/plenary.nvim' },
   opts = {
     edit = {
@@ -10,7 +11,7 @@ return {
   config = function(_, opts)
     require('chezmoi').setup(opts)
 
-    local chezmoi_source_path = require('chezmoi.commands.__source-path').execute()[1]
+    local chezmoi_source_path = require('chezmoi.commands.__source-path').execute({})[1]
     vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
       pattern = { chezmoi_source_path .. '/*' },
       callback = function(ev)

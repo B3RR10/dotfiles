@@ -47,6 +47,32 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+-- MiniFiles: add command for jumping to current file
+local focus_target_file = function()
+  local target_window = MiniFiles.get_explorer_state().target_window
+  local target_buf_id = vim.api.nvim_win_get_buf(target_window)
+  local current_file_path = vim.api.nvim_buf_get_name(target_buf_id)
+  if vim.uv.fs_stat(current_file_path) == nil then
+    return vim.notify('Current buffer not found in disk')
+  end
+
+  local paths = { current_file_path }
+  for dir in vim.fs.parents(current_file_path) do
+    table.insert(paths, 1, dir)
+    if dir == vim.env.PWD then
+      break
+    end
+  end
+
+  MiniFiles.set_branch(paths)
+end
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(args)
+    vim.keymap.set('n', ',', focus_target_file, { buffer = args.data.buf_id, desc = 'Focus current buffer' })
+  end,
+})
+
 return {
   'echasnovski/mini.nvim',
   lazy = false,
@@ -54,8 +80,12 @@ return {
     require('mini.ai').setup()
     require('mini.align').setup()
     require('mini.bracketed').setup()
-    require('mini.comment').setup()
-    require('mini.files').setup()
+    require('mini.files').setup({
+      windows = {
+        preview = true,
+        width_preview = 50,
+      },
+    })
     require('mini.icons').setup()
     require('mini.indentscope').setup()
     require('mini.jump2d').setup()
@@ -63,6 +93,6 @@ return {
   end,
   -- stylua: ignore
   keys = {
-    { '<C-p>', function() if not MiniFiles.close() then MiniFiles.open(vim.api.nvim_buf_get_name(0)) end end, desc = 'Toggle file explorer' },
+    { '<C-p>', function() if not MiniFiles.close() then MiniFiles.open() end end, desc = 'Toggle file explorer' },
   },
 }
