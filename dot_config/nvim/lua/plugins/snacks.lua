@@ -71,6 +71,7 @@ return {
         statusline = false,
         tabline = false,
       },
+      win = { backdrop = { transparent = false } }
     },
   },
   keys = function()
