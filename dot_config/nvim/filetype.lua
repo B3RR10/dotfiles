@@ -2,6 +2,9 @@ vim.filetype.add({
   extension = {
     -- helm
     gotmpl = 'helm',
+
+    -- xml
+    props = 'xml',
   },
   pattern = {
     -- Ansible
@@ -21,9 +24,9 @@ vim.filetype.add({
     ['docker%-compose.*%.ya?ml'] = 'yaml.docker-compose',
 
     -- helm
-    ['.*/templates/.*%.ya?ml'] = 'helm',
-    ['.*/templates/.*%.tpl'] = 'helm',
-    ['.*/templates/.*%.txt'] = 'helm',
+    ['.*helm.*/templates/.*%.ya?ml'] = 'helm',
+    ['.*helm.*/templates/.*%.tpl'] = 'helm',
+    ['.*helm.*/templates/.*%.txt'] = 'helm',
     ['helmfile.*%.ya?ml'] = 'helm',
   },
 })
