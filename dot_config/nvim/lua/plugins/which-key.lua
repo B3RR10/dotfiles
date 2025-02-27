@@ -8,8 +8,9 @@ return {
     spec = {
       { '<leader>f', group = 'File' },
       { '<leader>g', group = 'Git' },
-      { 'gr', group = 'LSP', mode = { 'n', 'v' } },
+      { '<leader>h', group = 'Harpoon' },
       { '<leader>n', group = 'Notification' },
+      { 'gr', group = 'LSP', mode = { 'n', 'v' } },
     },
   },
 }
