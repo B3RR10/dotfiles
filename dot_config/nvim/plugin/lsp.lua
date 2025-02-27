@@ -11,7 +11,7 @@ local servers = {
   tflint = require('lsp.tflint'),
   texlab = require('lsp.texlab'),
   jsonls = require('lsp.jsonls'),
-  yamlls = require('lsp.yamlls')
+  yamlls = require('lsp.yamlls'),
 }
 
 local group = vim.api.nvim_create_augroup('user.lsp.start', {})
@@ -30,7 +30,8 @@ for name, config in pairs(servers) do
         'force',
         capabilities,
         config.capabilities or {},
-        require('cmp_nvim_lsp').default_capabilities())
+        require('cmp_nvim_lsp').default_capabilities()
+      )
 
       vim.lsp.start(config, {
         bufnr = event.buf,
