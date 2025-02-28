@@ -45,7 +45,7 @@ return {
       desc = 'Add to Harpoon',
     },
     {
-      '<leader>h',
+      '<leader>l',
       function()
         Snacks.picker({
           finder = generate_harpoon_picker,
