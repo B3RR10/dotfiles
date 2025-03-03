@@ -100,13 +100,13 @@ return {
       -- `<CR>`, `'` does not insert pair after a letter.
       -- Only parts of tables can be tweaked (others will use these defaults).
       mappings = {
-        [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
-        ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
-        ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
-        ["["] = {
-          action = "open",
-          pair = "[]",
-          neigh_pattern = ".[%s%z%)}%]]",
+        [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+        [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+        ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+        ['['] = {
+          action = 'open',
+          pair = '[]',
+          neigh_pattern = '.[%s%z%)}%]]',
           register = { cr = false },
           -- foo|bar -> press "[" -> foo[bar
           -- foobar| -> press "[" -> foobar[]
@@ -117,11 +117,11 @@ return {
           -- (|) -> press "[" -> ([])
           -- [|] -> press "[" -> [[]]
         },
-        ["{"] = {
-          action = "open",
-          pair = "{}",
+        ['{'] = {
+          action = 'open',
+          pair = '{}',
           -- neigh_pattern = ".[%s%z%)}]",
-          neigh_pattern = ".[%s%z%)}%]]",
+          neigh_pattern = '.[%s%z%)}%]]',
           register = { cr = false },
           -- foo|bar -> press "{" -> foo{bar
           -- foobar| -> press "{" -> foobar{}
@@ -131,11 +131,11 @@ return {
           -- (|) -> press "{" -> ({})
           -- {|} -> press "{" -> {{}}
         },
-        ["("] = {
-          action = "open",
-          pair = "()",
+        ['('] = {
+          action = 'open',
+          pair = '()',
           -- neigh_pattern = ".[%s%z]",
-          neigh_pattern = ".[%s%z%)]",
+          neigh_pattern = '.[%s%z%)]',
           register = { cr = false },
           -- foo|bar -> press "(" -> foo(bar
           -- foobar| -> press "(" -> foobar()
@@ -145,26 +145,26 @@ return {
         },
         -- Single quote: Prevent pairing if either side is a letter
         ['"'] = {
-          action = "closeopen",
+          action = 'closeopen',
           pair = '""',
-          neigh_pattern = "[^%w\\][^%w]",
+          neigh_pattern = '[^%w\\][^%w]',
           register = { cr = false },
         },
         -- Single quote: Prevent pairing if either side is a letter
         ["'"] = {
-          action = "closeopen",
+          action = 'closeopen',
           pair = "''",
-          neigh_pattern = "[^%w\\][^%w]",
+          neigh_pattern = '[^%w\\][^%w]',
           register = { cr = false },
         },
         -- Backtick: Prevent pairing if either side is a letter
-        ["`"] = {
-          action = "closeopen",
-          pair = "``",
-          neigh_pattern = "[^%w\\][^%w]",
+        ['`'] = {
+          action = 'closeopen',
+          pair = '``',
+          neigh_pattern = '[^%w\\][^%w]',
           register = { cr = false },
         },
-      }
+      },
     })
     require('mini.surround').setup()
   end,
