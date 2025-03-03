@@ -3,58 +3,64 @@ return {
   build = ':MasonUpdate',
   cmd = 'Mason',
   opts = {
-    -- TODO: Define what should stay and what should go. Enable in null-ls the ones staying
     ensure_installed = {
-      -- LSP
+      -- ansible
       'ansible-language-server',
-      'bash-language-server',
-      'css-lsp',
-      'docker-compose-language-service',
-      'dockerfile-language-server',
-      'fsautocomplete',
-      'helm-ls',
-      'html-lsp',
-      'json-lsp',
-      'lua-language-server',
-      'python-lsp-server',
-      'roslyn',
-      'rust-analyzer',
-      'tailwindcss-language-server',
-      'terraform-ls',
-      'texlab',
-      'tflint',
-      'typescript-language-server',
-      'vim-language-server',
-      'yaml-language-server',
-      'yamllint',
-
-      -- Debbuger
-      'codelldb',
-
-      -- Linter
       'ansible-lint',
-      'hadolint',
-      'markdownlint',
+
+      -- bash/sh
+      'bash-language-server',
+      'shfmt',
       'shellcheck',
 
-      -- Formater
-      'fantomas',
-      'latexindent',
-      'prettier',
-      'shfmt',
-      'stylua',
-      'yamlfmt',
+      -- C#
+      'roslyn',
 
-      -- NPI
-      'black',
-      'delve',
-      'iferr',
-      'impl',
+      -- docker
+      'docker-compose-language-service',
+      'dockerfile-language-server',
+      'hadolint',
+
+      -- F#
+      'fsautocomplete',
+      'fantomas',
+
+      -- helm
+      'helm-ls',
+
+      -- json
+      'json-lsp',
+
+      -- latex
+      'texlab',
+      'latexindent',
+
+      -- lua
+      'lua-language-server',
+      'stylua',
+
+      -- markdown
       'markdown-toc',
+      'markdownlint',
+
+      -- python
+      'python-lsp-server',
       'ruff',
+
+      -- rust
+      'rust-analyzer',
+
+      -- terraform
+      'terraform-ls',
+      'tflint',
+
+      -- toml
       'taplo',
-      'tfsec',
-      'vint',
+
+      -- yaml
+      'yaml-language-server',
+      'yamlfmt',
+      'yamllint',
     },
     registries = {
       'github:mason-org/mason-registry',
