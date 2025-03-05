@@ -2,11 +2,17 @@
 return {
   'mfussenegger/nvim-lint',
   dependencies = 'mason.nvim',
-  event = 'FileType',
+  lazy = false,
   opts = {
+    events = {
+      'BufReadPost',
+      'BufWritePost',
+      'InsertLeave',
+      'TextChanged',
+    },
     linters_by_ft = {
       ansible = { 'ansible_lint' },
-      docker = { 'hadolint' },
+      dockerfile = { 'hadolint' },
       markdown = { 'markdownlint' },
       python = { 'ruff' },
       sh = { 'shellcheck' },
@@ -18,12 +24,11 @@ return {
     local lint = require('lint')
 
     lint.linters_by_ft = opts.linters_by_ft or {}
-    lint.linters = opts.linters or {}
 
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave' }, {
-      callback = function()
-        lint.try_lint()
-      end,
+    local group = vim.api.nvim_create_augroup('nvim-lint', { clear = true })
+    vim.api.nvim_create_autocmd(opts.events, {
+      group = group,
+      callback = function() lint.try_lint() end,
     })
   end,
 }
