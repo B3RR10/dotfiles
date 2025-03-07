@@ -16,19 +16,13 @@ return {
       pattern = { chezmoi_source_path .. '/*' },
       callback = function(ev)
         local bufnr = ev.buf
-        local edit_watch = function()
-          require('chezmoi.commands.__edit').watch(bufnr)
-        end
+        local edit_watch = function() require('chezmoi.commands.__edit').watch(bufnr) end
         vim.schedule(edit_watch)
       end,
     })
     vim.api.nvim_create_autocmd('BufReadPost', {
       pattern = { chezmoi_source_path .. '/*' },
-      callback = function()
-        vim.fn.chdir(chezmoi_source_path)
-      end,
+      callback = function() vim.fn.chdir(chezmoi_source_path) end,
     })
   end,
-
-  -- TODO: Add keybinding to select chezmoi files in Snacks.picker
 }

@@ -7,9 +7,7 @@ return {
       providers = { 'lsp', 'treesitter' },
     },
   },
-  config = function(_, opts)
-    require('illuminate').configure(opts)
-  end,
+  config = function(_, opts) require('illuminate').configure(opts) end,
   -- stylua: ignore
   keys = {
     { '[[', function() require('illuminate').goto_prev_reference() end, desc = 'Prev Reference', },

@@ -8,9 +8,7 @@ return {
   keys = {
     {
       'grf',
-      function()
-        require('conform').format({ async = true })
-      end,
+      function() require('conform').format({ async = true }) end,
       mode = { 'n', 'v' },
       desc = 'Format buffer',
     },
@@ -36,7 +34,5 @@ return {
       },
     },
   },
-  init = function()
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
+  init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
 }

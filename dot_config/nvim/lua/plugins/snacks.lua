@@ -88,17 +88,13 @@ return {
       local opts = {
         hidden = true,
       }
-      if is_git_repo() then
-        vim.list_extend(opts, { cwd = get_git_root() })
-      end
+      if is_git_repo() then vim.list_extend(opts, { cwd = get_git_root() }) end
       Snacks.picker.files(opts)
     end
 
     local function live_grep_from_project_git_root()
       local opts = {}
-      if is_git_repo() then
-        opts = { cwd = get_git_root() }
-      end
+      if is_git_repo() then opts = { cwd = get_git_root() } end
       Snacks.picker.grep(opts)
     end
 

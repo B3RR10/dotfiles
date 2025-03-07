@@ -12,9 +12,7 @@ return {
   keys = {
     {
       '<C-j>',
-      function()
-        return require('luasnip').jumpable(1) and '<Plug>luasnip-jump-next' or '<C-j>'
-      end,
+      function() return require('luasnip').jumpable(1) and '<Plug>luasnip-jump-next' or '<C-j>' end,
       expr = true,
       remap = true,
       silent = true,
@@ -22,16 +20,12 @@ return {
     },
     {
       '<C-j>',
-      function()
-        require('luasnip').jump(1)
-      end,
+      function() require('luasnip').jump(1) end,
       mode = 's',
     },
     {
       '<C-k>',
-      function()
-        require('luasnip').jump(-1)
-      end,
+      function() require('luasnip').jump(-1) end,
       mode = { 'i', 's' },
     },
   },

@@ -21,9 +21,7 @@ for name, config in pairs(servers) do
     pattern = config.filetypes,
     callback = function(event)
       config.name = name
-      if config.root_markers then
-        config.root_dir = vim.fs.root(event.buf, config.root_markers)
-      end
+      if config.root_markers then config.root_dir = vim.fs.root(event.buf, config.root_markers) end
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       config.capabilities = vim.tbl_deep_extend(

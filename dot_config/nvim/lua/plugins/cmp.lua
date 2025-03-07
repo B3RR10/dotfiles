@@ -30,9 +30,7 @@ return {
         completeopt = 'menu,menuone,noselect',
       },
       snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
+        expand = function(args) luasnip.lsp_expand(args.body) end,
       },
       mapping = {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -61,16 +59,15 @@ return {
           end
         end, { 'i', 's' }),
       },
-      sources = cmp.config.sources(
-        {
-          { name = 'copilot' },
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-        }, {
-          { name = 'buffer',    option = { keyword_pattern = [[\k\+]] } },
-          { name = 'path' },
-          { name = 'treesitter' },
-        }),
+      sources = cmp.config.sources({
+        { name = 'copilot' },
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+      }, {
+        { name = 'buffer', option = { keyword_pattern = [[\k\+]] } },
+        { name = 'path' },
+        { name = 'treesitter' },
+      }),
       formatting = {
         format = lspkind.cmp_format({
           menu = source_names,

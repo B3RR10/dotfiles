@@ -1,5 +1,4 @@
-return
-{
+return {
   'adelarsq/neofsharp.vim',
-  lazy = false
+  lazy = false,
 }

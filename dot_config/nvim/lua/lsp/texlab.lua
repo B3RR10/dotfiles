@@ -8,7 +8,14 @@ return {
       build = {
         executable = vim.fn.exepath('latexmk'),
         -- TODO: Move this to a .latexmkrc file on the project...
-        args = { '-pdf', '-interaction=nonstopmode', '-output-directory=build', '-synctex=1', '-shell-escape', '%f' },
+        args = {
+          '-pdf',
+          '-interaction=nonstopmode',
+          '-output-directory=build',
+          '-synctex=1',
+          '-shell-escape',
+          '%f',
+        },
         onSave = true,
       },
       chktex = { onOpenAndSave = true },

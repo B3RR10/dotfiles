@@ -1,11 +1,7 @@
 -- MiniFiles: toggle dotfiles
 local show_dotfiles = true
-local filter_show = function(_)
-  return true
-end
-local filter_hide = function(fs_entry)
-  return not vim.startswith(fs_entry.name, '.')
-end
+local filter_show = function(_) return true end
+local filter_hide = function(fs_entry) return not vim.startswith(fs_entry.name, '.') end
 local toggle_dotfiles = function()
   show_dotfiles = not show_dotfiles
   local new_filter = show_dotfiles and filter_show or filter_hide
@@ -59,9 +55,7 @@ local focus_target_file = function()
   local paths = { current_file_path }
   for dir in vim.fs.parents(current_file_path) do
     table.insert(paths, 1, dir)
-    if dir == vim.env.PWD then
-      break
-    end
+    if dir == vim.env.PWD then break end
   end
 
   MiniFiles.set_branch(paths)
@@ -69,7 +63,12 @@ end
 vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesBufferCreate',
   callback = function(args)
-    vim.keymap.set('n', ',', focus_target_file, { buffer = args.data.buf_id, desc = 'Focus current buffer' })
+    vim.keymap.set(
+      'n',
+      ',',
+      focus_target_file,
+      { buffer = args.data.buf_id, desc = 'Focus current buffer' }
+    )
   end,
 })
 

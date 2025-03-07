@@ -7,9 +7,7 @@ local function CloseHiddenBuffers()
 
   local buffers = vim.api.nvim_list_bufs()
 
-  if #buffers == #non_hidden_bufs then
-    return
-  end
+  if #buffers == #non_hidden_bufs then return end
 
   for _, buffer in ipairs(buffers) do
     if
@@ -38,13 +36,12 @@ local function CloseCurrentBuffer(opts)
   local function preserve_window_layout(bufnr, buffers)
     local all_windows = vim.api.nvim_list_wins()
 
-    local windows = vim.tbl_filter(function(win)
-      return vim.api.nvim_win_get_buf(win) == bufnr
-    end, all_windows)
+    local windows = vim.tbl_filter(
+      function(win) return vim.api.nvim_win_get_buf(win) == bufnr end,
+      all_windows
+    )
 
-    if #windows == 0 then
-      return
-    end
+    if #windows == 0 then return end
 
     for index, buffer in ipairs(buffers) do
       if buffer == bufnr then
@@ -58,13 +55,15 @@ local function CloseCurrentBuffer(opts)
 
   local bufnr = vim.api.nvim_get_current_buf()
 
-  local buffers = vim.tbl_filter(function(buf)
-    return vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_get_option_value('buflisted', { buf = buf })
-  end, vim.api.nvim_list_bufs())
+  local buffers = vim.tbl_filter(
+    function(buf)
+      return vim.api.nvim_buf_is_valid(buf)
+        and vim.api.nvim_get_option_value('buflisted', { buf = buf })
+    end,
+    vim.api.nvim_list_bufs()
+  )
 
-  if #buffers == 1 then
-    vim.cmd.quit({ bang = opts.bang })
-  end
+  if #buffers == 1 then vim.cmd.quit({ bang = opts.bang }) end
 
   preserve_window_layout(bufnr, buffers)
   vim.cmd.bwipe({ bufnr, bang = opts.bang })
