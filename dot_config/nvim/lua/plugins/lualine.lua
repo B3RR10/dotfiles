@@ -1,8 +1,5 @@
 return {
   'hoob3rt/lualine.nvim',
-  dependencies = {
-    'AndreM222/copilot-lualine',
-  },
   event = 'UIEnter',
   opts = function()
     local function harpooned()
