@@ -14,6 +14,7 @@ return {
     require('plugins.mini.bufremove').setup()
     require('plugins.mini.files').setup()
     require('plugins.mini.pairs').setup()
+    require('plugins.mini.statusline').setup()
   end,
   -- stylua: ignore
   keys = {
