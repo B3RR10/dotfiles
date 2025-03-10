@@ -10,6 +10,7 @@ return {
     require('mini.jump2d').setup()
     require('mini.surround').setup()
 
+    require('plugins.mini.bufremove').setup()
     require('plugins.mini.files').setup()
     require('plugins.mini.pairs').setup()
   end,
