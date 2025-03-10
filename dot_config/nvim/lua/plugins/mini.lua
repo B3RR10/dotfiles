@@ -17,8 +17,13 @@ return {
     require('plugins.mini.pairs').setup()
     require('plugins.mini.statusline').setup()
   end,
-  -- stylua: ignore
   keys = {
-    { '<C-p>', function() if not MiniFiles.close() then MiniFiles.open() end end, desc = 'Toggle file explorer' },
+    {
+      '<C-p>',
+      function()
+        if not MiniFiles.close() then MiniFiles.open() end
+      end,
+      desc = 'Toggle file explorer',
+    },
   },
 }
