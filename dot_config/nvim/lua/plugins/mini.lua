@@ -13,6 +13,7 @@ return {
 
     require('plugins.mini.bufremove').setup()
     require('plugins.mini.clue').setup()
+    require('plugins.mini.diff').setup()
     require('plugins.mini.files').setup()
     require('plugins.mini.pairs').setup()
     require('plugins.mini.statusline').setup()
@@ -25,5 +26,6 @@ return {
       end,
       desc = 'Toggle file explorer',
     },
+    { '<Leader>gp', function() MiniDiff.toggle_overlay(0) end, desc = 'Toggle diff overlay' },
   },
 }
