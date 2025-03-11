@@ -38,11 +38,21 @@ local is_harpooned = function()
 end
 
 ---@return __statusline_section
+local get_git_head = function()
+  local branch = vim.fn.FugitiveHead()
+  if not branch then return '' end
+
+  local elipsis = #branch > 20
+  -- Truncate branch always to 20 chars
+  return ' ' .. branch:sub(1, 20) .. (elipsis and '…' or '')
+end
+
+---@return __statusline_section
 local get_filename = function()
   if vim.bo.buftype == 'terminal' then
     return '%t'
   else
-    return '%f%m%r'
+    return vim.fn.expand('%:~:.') .. '%m%r'
   end
 end
 
@@ -120,18 +130,10 @@ local function active_statusline()
   local modified = is_modified()
   local harpooned = is_harpooned()
 
-  local git = MiniStatusline.section_git({ trunc_width = 40 })
-  local diff = MiniStatusline.section_diff({ icon = '', trunc_width = 75 })
-  local diagnostics = MiniStatusline.section_diagnostics({
-    wtrunc_width = 75,
-    icon = '',
-    signs = {
-      ERROR = '󰅚 ', -- x000f015a
-      WARN = '󰀪 ', -- x000f002a
-      INFO = '󰋽 ', -- x000f02fd
-      HINT = '󰌶 ', -- x000f0336
-    },
-  })
+  -- local git = MiniStatusline.section_git({ trunc_width = 40 })
+  local git = get_git_head()
+  local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+  local diagnostics = MiniStatusline.section_diagnostics({ wtrunc_width = 75 })
   local lsp = MiniStatusline.section_lsp({ icon = icons.get('lsp', 'event'), trunc_width = 75 })
 
   local filename = get_filename()
