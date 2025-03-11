@@ -99,6 +99,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
     end
 
-    vim.notify_once('Starting LSP:' .. client.name, vim.log.levels.INFO, { title = 'LSP' })
+    vim.notify_once('Starting LSP: ' .. client.name, vim.log.levels.INFO, { title = 'LSP' })
   end,
 })
