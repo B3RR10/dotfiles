@@ -2,6 +2,7 @@ return {
   'seblj/roslyn.nvim',
   lazy = false,
   opts = {
+    filewatching = 'off',
     config = {
       settings = {
         ['csharp|background_analysis'] = {
