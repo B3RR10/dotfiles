@@ -42,6 +42,11 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- windows to close
+local function close(opts)
+  vim.bo[opts.buffer].buflisted = false
+  return pcall(vim.cmd.close) or pcall(vim.cmd.quit)
+end
+
 vim.api.nvim_create_autocmd('FileType', {
   group = group,
   pattern = {
@@ -68,8 +73,12 @@ vim.api.nvim_create_autocmd('FileType', {
     'notify',
   },
   callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+    vim.keymap.set(
+      'n',
+      'q',
+      function() close({ buffer = event.buf }) end,
+      { buffer = event.buf, silent = true }
+    )
   end,
 })
 
