@@ -5,6 +5,7 @@ return {
   priority = 1000,
   opts = {
     input = require('plugins.snacks.input').config,
+    lazygit = { enabled = true },
     notifier = require('plugins.snacks.notifier').config,
     picker = require('plugins.snacks.picker').config,
     statuscolumn = { enabled = true },
@@ -14,6 +15,8 @@ return {
     zen = require('plugins.snacks.zen').config,
   },
   keys = {
+    { '<Leader>g', function() Snacks.lazygit.open() end, desc = 'Lazygit' },
+
     { '<leader><leader>', function() Snacks.picker.pickers() end, desc = 'Snacks pickers' },
     { '<leader><space>', function() Snacks.picker.buffers() end, desc = 'Find Buffers' },
 
