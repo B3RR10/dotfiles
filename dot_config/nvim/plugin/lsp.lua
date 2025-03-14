@@ -102,3 +102,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.notify_once('Starting LSP: ' .. client.name, vim.log.levels.INFO, { title = 'LSP' })
   end,
 })
+
+-- -------- --
+-- Codelens --
+-- -------- --
+vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+  callback = function() vim.lsp.codelens.refresh({ bufnr = 0 }) end,
+})
