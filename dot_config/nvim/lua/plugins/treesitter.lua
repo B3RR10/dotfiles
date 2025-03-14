@@ -7,6 +7,7 @@ return {
     },
     build = ':TSUpdate',
     event = { 'BufRead', 'BufNewFile' },
+    main = 'nvim-treesitter.configs',
     opts = {
       sync_install = false,
       ensure_installed = {
@@ -87,6 +88,5 @@ return {
         },
       },
     },
-    config = function(_, opts) require('nvim-treesitter.configs').setup(opts) end,
   },
 }
