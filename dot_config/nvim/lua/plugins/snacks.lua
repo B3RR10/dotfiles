@@ -15,7 +15,7 @@ return {
     zen = require('plugins.snacks.zen').config,
   },
   keys = {
-    { '<Leader>g', function() Snacks.lazygit.open() end, desc = 'Lazygit' },
+    { '<Leader>gg', function() Snacks.lazygit.open() end, desc = 'Lazygit' },
 
     { '<leader><leader>', function() Snacks.picker.pickers() end, desc = 'Snacks pickers' },
     { '<leader><space>', function() Snacks.picker.buffers() end, desc = 'Find Buffers' },
