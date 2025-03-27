@@ -10,14 +10,12 @@ return {
     'hrsh7th/cmp-path',
     'ray-x/cmp-treesitter',
     'onsails/lspkind-nvim',
-    { 'zbirenbaum/copilot-cmp', config = true },
   },
   opts = function()
     local cmp = require('cmp')
     local lspkind = require('lspkind')
     local luasnip = require('luasnip')
     local source_names = {
-      copilot = '[Copilot]',
       buffer = '[Buffer]',
       luasnip = '[Snippet]',
       nvim_lsp = '[LSP]',
@@ -60,7 +58,6 @@ return {
         end, { 'i', 's' }),
       },
       sources = cmp.config.sources({
-        { name = 'copilot' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
       }, {
@@ -72,7 +69,6 @@ return {
         format = lspkind.cmp_format({
           menu = source_names,
           mode = 'symbol',
-          symbol_map = { Copilot = '' },
         }),
       },
       experimental = {
