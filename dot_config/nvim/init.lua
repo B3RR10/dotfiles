@@ -57,6 +57,7 @@ vim.opt.textwidth = 120
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 300
 vim.opt.visualbell = true
+vim.opt.winborder = 'rounded'
 
 -- Install lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
