@@ -4,7 +4,6 @@ return {
   config = function()
     require('mini.ai').setup()
     require('mini.align').setup()
-    require('mini.bracketed').setup()
     require('mini.icons').setup()
     require('mini.indentscope').setup()
     require('mini.jump2d').setup()

@@ -45,35 +45,51 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('gri', Snacks.picker.lsp_implementations, { desc = 'Goto Implementation' })
     map('grt', Snacks.picker.lsp_type_definitions, { desc = 'Goto Type Definition' })
 
-    map('<C-s>', vim.lsp.buf.signature_help, { desc = 'Signature Help', mode = 'i' })
-
-    map(
-      '[e',
-      function() MiniBracketed.diagnostic('backward', { severity = vim.diagnostic.severity.ERROR }) end,
-      { desc = 'Prev Error' }
-    )
     map(
       ']e',
-      function() MiniBracketed.diagnostic('forward', { severity = vim.diagnostic.severity.ERROR }) end,
-      { desc = 'Next Error' }
+      function()
+        vim.diagnostic.jump({ count = vim.v.count1, severity = vim.diagnostic.severity.ERROR })
+      end,
+      { desc = 'Jump to the next error in the current buffer' }
+    )
+    map(
+      '[e',
+      function()
+        vim.diagnostic.jump({ count = -vim.v.count1, severity = vim.diagnostic.severity.ERROR })
+      end,
+      { desc = 'Jump to the previous error in the current buffer' }
+    )
+    map(
+      ']E',
+      function()
+        vim.diagnostic.jump({
+          count = math.huge,
+          wrap = false,
+          severity = vim.diagnostic.severity.ERROR,
+        })
+      end,
+      { desc = 'Jump to the last error in the current buffer' }
+    )
+    map(
+      '[E',
+      function()
+        vim.diagnostic.jump({
+          count = -math.huge,
+          wrap = false,
+          severity = vim.diagnostic.severity.ERROR,
+        })
+      end,
+      { desc = 'Jump to the first error in the current buffer' }
     )
 
     map('grs', Snacks.picker.lsp_symbols, { desc = 'Document Symbols' })
     map('grw', Snacks.picker.lsp_workspace_symbols, { desc = 'Workspace Symbols' })
 
-    if client.supports_method('textDocument/codeAction') then
-      map('gra', vim.lsp.buf.code_action, { desc = 'Code Action', mode = { 'n', 'v' } })
-    end
-
-    if client.supports_method('textDocument/rename') then
-      map('grn', vim.lsp.buf.rename, { desc = 'Rename' })
-    end
-
     -- ----------- --
     -- Inlay hints --
     -- ----------- --
 
-    if client.supports_method('textDocument/inlayHint') then
+    if client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
     end
 
