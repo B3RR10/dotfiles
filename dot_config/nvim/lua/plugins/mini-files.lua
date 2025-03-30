@@ -82,6 +82,10 @@ function M.setup()
       width_preview = 50,
     },
   })
+
+  vim.keymap.set('n', '<C-p>', function()
+    if not MiniFiles.close() then MiniFiles.open() end
+  end, { desc = 'Toggle file explorer' })
 end
 
 return M

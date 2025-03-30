@@ -1,15 +1,19 @@
-return {
-  'RRethy/vim-illuminate',
-  event = { 'BufReadPost', 'BufNewFile' },
-  opts = {
-    large_file_cutoff = 2000,
-    large_file_overrides = {
-      providers = { 'lsp', 'treesitter' },
-    },
+require('illuminate').configure({
+  large_file_cutoff = 2000,
+  large_file_overrides = {
+    providers = { 'lsp', 'treesitter' },
   },
-  config = function(_, opts) require('illuminate').configure(opts) end,
-  keys = {
-    { '[[', function() require('illuminate').goto_prev_reference() end, desc = 'Prev Reference' },
-    { ']]', function() require('illuminate').goto_next_reference() end, desc = 'Next Reference' },
-  },
-}
+})
+
+vim.keymap.set(
+  'n',
+  '[[',
+  function() require('illuminate').goto_prev_reference() end,
+  { desc = 'Prev Reference' }
+)
+vim.keymap.set(
+  'n',
+  ']]',
+  function() require('illuminate').goto_next_reference() end,
+  { desc = 'Next Reference' }
+)

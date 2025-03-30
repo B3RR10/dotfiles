@@ -1,6 +1,5 @@
 local M = {}
 
-local harpoon = require('harpoon')
 local icons = require('mini.icons')
 
 ---@module 'mini.statusline'
@@ -13,6 +12,8 @@ end
 
 ---@return __statusline_section
 local is_harpooned = function()
+  local harpoon = require('harpoon')
+
   local harpoon_icon = icons.get('filetype', 'harpoon')
 
   local root_dir = harpoon:list().config.get_root_dir()
