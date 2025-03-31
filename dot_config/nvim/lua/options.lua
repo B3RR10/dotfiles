@@ -20,7 +20,6 @@ vim.opt.completeopt = 'menuone,noselect'
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = 'number'
 vim.opt.expandtab = true
--- vim.opt.foldclose = 'all'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldmethod = 'expr'
 vim.opt.foldnestmax = 3
