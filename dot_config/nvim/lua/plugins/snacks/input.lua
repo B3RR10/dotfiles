@@ -1,6 +1,5 @@
 local M = {}
 
----@type snacks.input.Config
 M.config = {
   enabled = true,
 }

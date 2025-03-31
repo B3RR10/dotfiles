@@ -1,6 +1,5 @@
 local M = {}
 
----@type snacks.notifier.Config
 M.config = {
   enabled = true,
 }

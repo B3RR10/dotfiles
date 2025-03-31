@@ -1,6 +1,5 @@
 local M = {}
 
----@type snacks.zen.Config
 M.config = {
   enabled = true,
   toggles = {
