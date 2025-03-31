@@ -63,6 +63,13 @@ now({ setup = 'mini.tabline' })
 now({ setup = 'plugins.mini-statusline' })
 now({ add = 'folke/snacks.nvim', require = 'plugins.snacks' })
 
+now({ add = 'whiteinge/diffconflicts' })
+now({ add = 'b0o/SchemaStore.nvim' })
+now({ add = 'tpope/vim-git' })
+now({ add = 'NoahTheDuke/vim-just' })
+now({ add = 'adelarsq/neofsharp.vim' })
+now({ add = 'mrcjkb/rustaceanvim' })
+
 later({
   add = {
     source = 'saghen/blink.cmp',
@@ -123,14 +130,7 @@ later({
   require = 'plugins.roslyn',
 })
 
-later({ add = 'tpope/vim-git' })
-later({ add = 'NoahTheDuke/vim-just' })
-later({ add = 'adelarsq/neofsharp.vim' })
-later({ add = 'mrcjkb/rustaceanvim' })
-later({ add = 'b0o/SchemaStore.nvim' })
-
 later({ add = 'zk-org/zk-nvim', setup = 'zk' })
 
 later({ add = 'norcalli/nvim-colorizer.lua', setup = 'colorizer' })
-later({ add = 'whiteinge/diffconflicts' })
 later({ add = 'ellisonleao/glow.nvim', setup = 'glow' })
