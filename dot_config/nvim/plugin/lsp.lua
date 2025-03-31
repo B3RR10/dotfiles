@@ -1,9 +1,3 @@
-vim.lsp.config('*', {
-  capabilities = require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-  ),
-})
-
 vim.lsp.enable({
   'ansiblels',
   'bashls',
@@ -93,7 +87,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
     end
 
-    vim.notify_once('Starting LSP: ' .. client.name, vim.log.levels.INFO, { title = 'LSP' })
+    vim.notify_once('Attached to LSP: ' .. client.name, vim.log.levels.INFO, { title = 'LSP' })
   end,
 })
 

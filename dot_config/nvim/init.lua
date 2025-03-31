@@ -63,30 +63,17 @@ now({ setup = 'mini.tabline' })
 now({ setup = 'plugins.mini-statusline' })
 now({ add = 'folke/snacks.nvim', require = 'plugins.snacks' })
 
--- TODO: Move to blink
 later({
   add = {
-    source = 'L3MON4D3/LuaSnip',
-    depends = { 'honza/vim-snippets', 'rafamadriz/friendly-snippets' },
-    hooks = { post_checkout = function() vim.system({ 'make', 'install_jsregexp' }) end },
-  },
-  require = 'plugins.luasnip',
-})
--- It has to load on startup since it's required by plugin/lsp.lua to set capabilities. TODO: Move to blink
-later({
-  add = {
-    source = 'hrsh7th/nvim-cmp',
-    depends = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-nvim-lsp',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-path',
-      'ray-x/cmp-treesitter',
-      'onsails/lspkind-nvim',
-      'LuaSnip',
+    source = 'saghen/blink.cmp',
+    depends = { 'rafamadriz/friendly-snippets' },
+    checkout = 'v1.0.0',
+    hooks = {
+      post_checkout = function() vim.system({ 'cargo', 'build', '--release' }):wait() end,
+      post_install = function() vim.system({ 'cargo', 'build', '--release' }):wait() end,
     },
   },
-  require = 'plugins.cmp',
+  require = 'plugins.blink',
 })
 
 later({
@@ -128,18 +115,18 @@ later({
 })
 
 later({
-  add = { source = 'ionide/Ionide-vim', depends = { 'cmp-nvim-lsp' } },
+  add = { source = 'ionide/Ionide-vim', depends = { 'blink.cmp' } },
   require = 'plugins.ionide',
 })
 later({
-  add = { source = 'seblj/roslyn.nvim', depends = { 'cmp-nvim-lsp' } },
+  add = { source = 'seblj/roslyn.nvim', depends = { 'blink.cmp' } },
   require = 'plugins.roslyn',
 })
 
 later({ add = 'tpope/vim-git' })
 later({ add = 'NoahTheDuke/vim-just' })
 later({ add = 'adelarsq/neofsharp.vim' })
-later({ add = { source = 'mrcjkb/rustaceanvim', checkout = '^5' } })
+later({ add = 'mrcjkb/rustaceanvim' })
 later({ add = 'b0o/SchemaStore.nvim' })
 
 later({ add = 'zk-org/zk-nvim', setup = 'zk' })
