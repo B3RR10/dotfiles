@@ -1,44 +1,10 @@
-local M = {}
-
 local icons = require('mini.icons')
 
----@module 'mini.statusline'
-
----@return __statusline_section
 local is_modified = function()
   if vim.bo.modified then return '●' end
   return ''
 end
 
----@return __statusline_section
-local is_harpooned = function()
-  local harpoon = require('harpoon')
-
-  local harpoon_icon = icons.get('filetype', 'harpoon')
-
-  local root_dir = harpoon:list().config.get_root_dir()
-  local current_file_path = vim.api.nvim_buf_get_name(0)
-
-  local harpoon_items = harpoon:list().items
-
-  for _, harpoon_item in ipairs(harpoon_items) do
-    local harpoon_path = harpoon_item.value
-
-    -- If relative path, prepend root_dir
-    if string.sub(harpoon_path, 1, 1) ~= '/' then
-      local path_separator = '/'
-      if vim.fn.has('win32') == 1 or vim.fn.has('win32unix') == 1 then path_separator = '\\' end
-
-      harpoon_path = root_dir .. path_separator .. harpoon_path
-    end
-
-    if harpoon_path == current_file_path then return harpoon_icon end
-  end
-
-  return ''
-end
-
----@return __statusline_section
 local get_git_head = function()
   local branch = vim.fn.FugitiveHead()
   if not branch then return '' end
@@ -48,7 +14,6 @@ local get_git_head = function()
   return ' ' .. branch:sub(1, 20) .. (elipsis and '…' or '')
 end
 
----@return __statusline_section
 local get_filename = function()
   if vim.bo.buftype == 'terminal' then
     return '%t'
@@ -57,7 +22,6 @@ local get_filename = function()
   end
 end
 
----@return __statusline_section
 local get_file_type = function()
   local filetype = vim.bo.filetype
   local icon = icons.get('filetype', filetype)
@@ -65,9 +29,6 @@ local get_file_type = function()
   return filetype
 end
 
----@param args __statusline_args
----
----@return __statusline_section
 local get_encoding = function(args)
   if MiniStatusline.is_truncated(args.trunc_width) then return '' end
   local encoding = vim.bo.fileencoding or vim.bo.encoding
@@ -75,9 +36,6 @@ local get_encoding = function(args)
   return encoding
 end
 
----@param args __statusline_args
----
----@return __statusline_section
 local get_file_format = function(args)
   if MiniStatusline.is_truncated(args.trunc_width) then return '' end
   local get_icon = function(name) return icons.get('os', name) end
@@ -91,9 +49,6 @@ local get_file_format = function(args)
   return symbols[format]
 end
 
----@param args __statusline_args
----
----@return __statusline_section
 local get_file_size = function(args)
   if MiniStatusline.is_truncated(args.trunc_width) then return '' end
 
@@ -114,9 +69,6 @@ local get_file_size = function(args)
   end
 end
 
----@param args __statusline_args
----
----@return __statusline_section
 local get_location = function(args)
   local down_arrow = '↓ '
   local right_arrow = '→'
@@ -129,9 +81,7 @@ end
 local function active_statusline()
   local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
   local modified = is_modified()
-  local harpooned = is_harpooned()
 
-  -- local git = MiniStatusline.section_git({ trunc_width = 40 })
   local git = get_git_head()
   local diff = MiniStatusline.section_diff({ trunc_width = 75 })
   local diagnostics = MiniStatusline.section_diagnostics({ wtrunc_width = 75 })
@@ -149,7 +99,7 @@ local function active_statusline()
   local location = get_location({ trunc_width = 85 })
 
   return MiniStatusline.combine_groups({
-    { hl = mode_hl, strings = { mode, modified, harpooned } },
+    { hl = mode_hl, strings = { mode, modified } },
     { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
     '%<', -- Mark general truncate point
     { hl = 'MiniStatuslineFilename', strings = { filename } },
@@ -159,12 +109,8 @@ local function active_statusline()
   })
 end
 
-M.setup = function()
-  require('mini.statusline').setup({
-    content = {
-      active = active_statusline,
-    },
-  })
-end
-
-return M
+require('mini.statusline').setup({
+  content = {
+    active = active_statusline,
+  },
+})

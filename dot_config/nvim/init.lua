@@ -51,7 +51,7 @@ now({ add = 'Bekaboo/dropbar.nvim' })
 now({ add = 'tpope/vim-fugitive' })
 now({ setup = 'mini.icons' })
 now({ setup = 'mini.tabline' })
-now({ setup = 'plugins.mini-statusline' })
+now({ require = 'plugins.mini-statusline' })
 now({ add = 'folke/snacks.nvim', require = 'plugins.snacks' })
 
 now({ add = 'whiteinge/diffconflicts' })
