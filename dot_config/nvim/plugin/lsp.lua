@@ -34,10 +34,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Mappings --
     -- -------- --
 
-    map('gd', Snacks.picker.lsp_definitions, { desc = 'Goto Definition' })
-    map('grr', Snacks.picker.lsp_references, { desc = 'References' })
-    map('gri', Snacks.picker.lsp_implementations, { desc = 'Goto Implementation' })
-    map('grt', Snacks.picker.lsp_type_definitions, { desc = 'Goto Type Definition' })
+    map(
+      'gd',
+      function() MiniExtra.pickers.lsp({ scope = 'definition' }) end,
+      { desc = 'Goto Definition' }
+    )
+    map(
+      'grr',
+      function() MiniExtra.pickers.lsp({ scope = 'references' }) end,
+      { desc = 'References' }
+    )
+    map(
+      'gri',
+      function() MiniExtra.pickers.lsp({ scope = 'implementation' }) end,
+      { desc = 'Goto Implementation' }
+    )
+    map(
+      'grt',
+      function() MiniExtra.pickers.lsp({ scope = 'type_definition' }) end,
+      { desc = 'Goto Type Definition' }
+    )
 
     map(
       ']e',
@@ -75,9 +91,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end,
       { desc = 'Jump to the first error in the current buffer' }
     )
+    map(
+      'grd',
+      function() MiniExtra.pickers.diagnostic({ scope = 'current' }) end,
+      { desc = 'List diagnostics for buffer' }
+    )
+    map(
+      'grD',
+      function() MiniExtra.pickers.diagnostic() end,
+      { desc = 'List diagnostics for workspace' }
+    )
 
-    map('grs', Snacks.picker.lsp_symbols, { desc = 'Document Symbols' })
-    map('grw', Snacks.picker.lsp_workspace_symbols, { desc = 'Workspace Symbols' })
+    map(
+      'grs',
+      function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end,
+      { desc = 'Document Symbols' }
+    )
+    map(
+      'grw',
+      function() MiniExtra.pickers.lsp({ scope = 'workspace_symbol' }) end,
+      { desc = 'Workspace Symbols' }
+    )
 
     -- ----------- --
     -- Inlay hints --

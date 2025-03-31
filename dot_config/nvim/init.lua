@@ -48,15 +48,6 @@ now({ require = { 'options', 'keymaps' } })
 now({ add = 'rebelot/kanagawa.nvim', require = 'plugins.kanagawa' })
 now({ add = 'Bekaboo/dropbar.nvim' })
 
-now({
-  add = {
-    source = 'ThePrimeagen/harpoon',
-    checkout = 'harpoon2',
-    monitor = 'harpoon2',
-    depends = { 'nvim-lua/plenary.nvim' },
-  },
-  require = 'plugins.harpoon',
-})
 now({ add = 'tpope/vim-fugitive' })
 now({ setup = 'mini.icons' })
 now({ setup = 'mini.tabline' })
@@ -98,14 +89,18 @@ later({ add = 'williamboman/mason.nvim', require = 'plugins.mason' })
 
 later({ setup = 'mini.ai' })
 later({ setup = 'mini.align' })
+later({ setup = 'mini.extra' })
 later({ setup = 'mini.indentscope' })
 later({ setup = 'mini.jump2d' })
 later({ setup = 'mini.surround' })
-later({ setup = 'plugins.mini-bufremove' })
-later({ setup = 'plugins.mini-clue' })
-later({ setup = 'plugins.mini-diff' })
-later({ setup = 'plugins.mini-files' })
-later({ setup = 'plugins.mini-pairs' })
+later({ setup = 'mini.visits' })
+later({ require = 'plugins.mini-bufremove' })
+later({ require = 'plugins.mini-clue' })
+later({ require = 'plugins.mini-diff' })
+later({ require = 'plugins.mini-files' })
+later({ require = 'plugins.mini-notify' })
+later({ require = 'plugins.mini-pairs' })
+later({ require = 'plugins.mini-pick' })
 
 later({
   add = { source = 'stevearc/conform.nvim', depends = { 'mason.nvim' } },
