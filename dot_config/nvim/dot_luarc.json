@@ -8,6 +8,7 @@
         "MiniFiles",
         "MiniStatusline",
         "Snacks",
-        "MiniPick"
+        "MiniPick",
+        "MiniNotify"
     ]
 }
