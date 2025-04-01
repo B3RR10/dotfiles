@@ -29,16 +29,22 @@ vim.keymap.set(
   { desc = 'List visit paths' }
 )
 
-vim.keymap.set(
-  'n',
-  '<leader>ff',
-  function() MiniPick.builtin.files({}, get_path_opts()) end,
-  { desc = 'Find files (Git root or CWD)' }
-)
+vim.keymap.set('n', '<leader>ff', function()
+  if is_git_repo() then
+    MiniExtra.pickers.git_files({}, get_path_opts())
+  else
+    MiniPick.builtin.cli({ command = { 'fd', '--hidden', '--type', 'f' } }, get_path_opts())
+  end
+end, { desc = 'Find files (Git root or CWD)' })
 vim.keymap.set(
   'n',
   '<leader>fF',
-  function() MiniPick.builtin.files({}, { source = { cwd = '~/' } }) end,
+  function()
+    MiniPick.builtin.cli(
+      { command = { 'fd', '--hidden', '--no-ignore', '--follow', '--type', 'f' } },
+      get_path_opts()
+    )
+  end,
   { desc = 'Find files in ~' }
 )
 vim.keymap.set(
