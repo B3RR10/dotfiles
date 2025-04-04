@@ -129,3 +129,4 @@ later({ add = 'zk-org/zk-nvim', setup = 'zk' })
 
 later({ add = 'norcalli/nvim-colorizer.lua', setup = 'colorizer' })
 later({ add = 'ellisonleao/glow.nvim', setup = 'glow' })
+later({ add = 'mistweaverco/kulala.nvim', require = 'plugins.kulala' })
