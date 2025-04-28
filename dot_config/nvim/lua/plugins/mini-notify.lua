@@ -1,8 +1,4 @@
-require('mini.notify').setup({
-  lsp_progress = {
-    duration_last = 5000,
-  },
-})
+require('mini.notify').setup()
 
 vim.notify = require('mini.notify').make_notify()
 
