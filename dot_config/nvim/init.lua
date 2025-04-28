@@ -61,6 +61,21 @@ now({ add = 'NoahTheDuke/vim-just' })
 now({ add = 'adelarsq/neofsharp.vim' })
 now({ add = 'mrcjkb/rustaceanvim' })
 
+later({ setup = 'mini.ai' })
+later({ setup = 'mini.align' })
+later({ setup = 'mini.extra' })
+later({ setup = 'mini.indentscope' })
+later({ setup = 'mini.jump2d' })
+later({ setup = 'mini.surround' })
+later({ setup = 'mini.visits' })
+later({ require = 'plugins.mini-bufremove' })
+later({ require = 'plugins.mini-clue' })
+later({ require = 'plugins.mini-diff' })
+later({ require = 'plugins.mini-files' })
+later({ require = 'plugins.mini-notify' })
+later({ require = 'plugins.mini-pairs' })
+later({ require = 'plugins.mini-pick' })
+
 later({
   add = {
     source = 'saghen/blink.cmp',
@@ -86,21 +101,6 @@ later({
   require = 'plugins.treesitter',
 })
 later({ add = 'williamboman/mason.nvim', require = 'plugins.mason' })
-
-later({ setup = 'mini.ai' })
-later({ setup = 'mini.align' })
-later({ setup = 'mini.extra' })
-later({ setup = 'mini.indentscope' })
-later({ setup = 'mini.jump2d' })
-later({ setup = 'mini.surround' })
-later({ setup = 'mini.visits' })
-later({ require = 'plugins.mini-bufremove' })
-later({ require = 'plugins.mini-clue' })
-later({ require = 'plugins.mini-diff' })
-later({ require = 'plugins.mini-files' })
-later({ require = 'plugins.mini-notify' })
-later({ require = 'plugins.mini-pairs' })
-later({ require = 'plugins.mini-pick' })
 
 later({
   add = { source = 'stevearc/conform.nvim', depends = { 'mason.nvim' } },
