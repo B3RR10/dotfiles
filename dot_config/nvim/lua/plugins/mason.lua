@@ -25,6 +25,7 @@ local tools = {
 
   -- json
   'json-lsp',
+  'jq',
 
   -- latex
   'texlab',

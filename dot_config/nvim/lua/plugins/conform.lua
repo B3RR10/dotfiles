@@ -2,6 +2,7 @@ local conform = require('conform')
 
 conform.setup({
   formatters_by_ft = {
+    json = { 'jq' },
     lua = { 'stylua' },
     md = { 'markdown-toc' },
     python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
