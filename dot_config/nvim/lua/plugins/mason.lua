@@ -69,7 +69,10 @@ local mr = require('mason-registry')
 local function ensure_installed()
   for _, tool in ipairs(tools) do
     local p = mr.get_package(tool)
-    if not p:is_installed() then p:install() end
+    if not p:is_installed() then
+      p:install()
+      vim.notify('Installed ' .. tool, vim.log.levels.INFO, { title = 'Mason' })
+    end
   end
 end
 if mr.refresh then
