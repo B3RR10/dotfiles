@@ -59,7 +59,7 @@ now({ add = 'b0o/SchemaStore.nvim' })
 now({ add = 'tpope/vim-git' })
 now({ add = 'NoahTheDuke/vim-just' })
 now({ add = 'adelarsq/neofsharp.vim' })
-now({ add = { source = 'mrcjkb/rustaceanvim', checkout = 'v6.0.5' } })
+now({ add = { source = 'mrcjkb/rustaceanvim', checkout = 'v6.0.8', monitor = 'master' } })
 
 later({ setup = 'mini.ai' })
 later({ setup = 'mini.align' })
