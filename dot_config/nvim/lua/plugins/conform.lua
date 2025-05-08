@@ -5,6 +5,7 @@ conform.setup({
     json = { 'jq' },
     lua = { 'stylua' },
     md = { 'markdown-toc' },
+    nix = { 'nixfmt' },
     python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
     sh = { 'shfmt' },
     toml = { 'taplo' },

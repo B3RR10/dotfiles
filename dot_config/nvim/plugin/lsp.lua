@@ -5,6 +5,7 @@ vim.lsp.enable({
   'dockerls',
   'helm_ls',
   'lua_ls',
+  'nixd',
   'pylsp',
   'terraformls',
   'tflint',
