@@ -2,12 +2,16 @@ local conform = require('conform')
 
 conform.setup({
   formatters_by_ft = {
+    bib = { 'tex-fmt' },
+    cls = { 'tex-fmt' },
     json = { 'jq' },
     lua = { 'stylua' },
     md = { 'markdown-toc' },
     nix = { 'nixfmt' },
     python = { 'ruff_organize_imports', 'ruff_fix', 'ruff_format' },
     sh = { 'shfmt' },
+    sty = { 'tex-fmt' },
+    tex = { 'tex-fmt' },
     toml = { 'taplo' },
     yaml = { 'yamlfmt' },
   },

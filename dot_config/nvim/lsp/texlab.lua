@@ -1,7 +1,7 @@
 return {
   cmd = { 'texlab' },
-  filetypes = { 'tex', 'plaintex', 'bib' },
-  root_markers = { '.git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml' },
+  filetypes = { 'tex', 'plaintex', 'bib', 'cls', 'sty' },
+  root_markers = { '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic.toml', '.git' },
   settings = {
     texlab = {
       rootDirectory = nil,

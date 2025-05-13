@@ -29,7 +29,7 @@ local tools = {
 
   -- latex
   'texlab',
-  'latexindent',
+  'tex-fmt',
 
   -- lua
   'lua-language-server',
