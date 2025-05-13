@@ -7,7 +7,7 @@ eval "$(pyenv init --path)"
 
 znap source ohmyzsh/ohmyzsh \
     lib/{git,key-bindings} \
-    plugins/{ansible,brew,direnv,fzf,git,git-extras,kubectl,nvm,opentofu,pyenv,rsync}
+    plugins/{ansible,brew,direnv,fzf,git,git-extras,kubectl,nvm,opentofu,pyenv,rsync,z}
 
 znap source Aloxaf/fzf-tab
 # set case insensitive and partial completion
@@ -16,8 +16,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 zstyle ':completion:*:descriptions' format '[%d]'
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-
-znap source rupa/z
 
 znap source zsh-users/zsh-completions
 
