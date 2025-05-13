@@ -4,6 +4,7 @@ conform.setup({
   formatters_by_ft = {
     bib = { 'tex-fmt' },
     cls = { 'tex-fmt' },
+    fsharp_project = { 'xmllint' },
     json = { 'jq' },
     lua = { 'stylua' },
     md = { 'markdown-toc' },
@@ -13,6 +14,7 @@ conform.setup({
     sty = { 'tex-fmt' },
     tex = { 'tex-fmt' },
     toml = { 'taplo' },
+    xml = { 'xmllint' },
     yaml = { 'yamlfmt' },
   },
   default_format_opts = {
