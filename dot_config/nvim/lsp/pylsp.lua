@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'pylsp' },
   filetypes = { 'python' },

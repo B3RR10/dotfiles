@@ -1,4 +1,4 @@
----@return vim.lsp.ClientConfig
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'helm_ls', 'serve' },
   filetypes = { 'helm' },

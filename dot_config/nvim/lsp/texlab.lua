@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'texlab' },
   filetypes = { 'tex', 'plaintex', 'bib', 'cls', 'sty' },

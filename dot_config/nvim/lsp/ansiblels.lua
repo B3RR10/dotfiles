@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'ansible-language-server', '--stdio' },
   settings = {

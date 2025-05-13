@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
   cmd = { 'tflint', '--langserver' },
   filetypes = { 'terraform' },
