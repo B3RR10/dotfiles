@@ -1,11 +1,27 @@
 require('snacks').setup({
-  input = require('plugins.snacks.input').config,
+  input = { enabled = true },
   lazygit = { enabled = true },
   statuscolumn = { enabled = true },
   styles = {
-    input = require('plugins.snacks.input').style,
+    input = {
+      relative = 'cursor',
+      row = -3,
+      col = 0,
+    },
   },
-  zen = require('plugins.snacks.zen').config,
+  zen = {
+    enabled = true,
+    toggles = {
+      dim = false,
+      git_signs = false,
+      mini_diff_signs = false,
+    },
+    show = {
+      statusline = false,
+      tabline = false,
+    },
+    win = { backdrop = { transparent = false } },
+  },
 })
 
 vim.keymap.set('n', '<Leader>gg', Snacks.lazygit.open, { desc = 'Lazygit' })
