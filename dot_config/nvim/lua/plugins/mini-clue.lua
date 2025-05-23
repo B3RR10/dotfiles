@@ -13,6 +13,7 @@ miniclue.setup({
     { mode = 'n', keys = '<Leader>f', desc = '+File' },
     { mode = 'n', keys = '<Leader>g', desc = '+Git' },
     { mode = 'n', keys = '<Leader>n', desc = '+Notification' },
+    { mode = 'n', keys = '<Leader>t', desc = '+Toggle' },
 
     { mode = 'n', keys = 'gr', desc = '+LSP' },
     { mode = 'v', keys = 'gr', desc = '+LSP' },
