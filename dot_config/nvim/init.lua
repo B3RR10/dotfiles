@@ -80,7 +80,7 @@ later({
   add = {
     source = 'saghen/blink.cmp',
     depends = { 'rafamadriz/friendly-snippets' },
-    checkout = 'v1.2.0',
+    checkout = 'v1.3.0',
     monitor = 'main',
     hooks = {
       post_checkout = function() vim.system({ 'cargo', 'build', '--release' }):wait() end,
