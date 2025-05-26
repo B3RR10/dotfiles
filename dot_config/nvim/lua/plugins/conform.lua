@@ -21,6 +21,9 @@ conform.setup({
     lsp_format = 'fallback',
   },
   format_on_save = function(bufnr)
+    local ignore_files = { 'xml' }
+    if vim.tbl_contains(ignore_files, vim.bo[bufnr].filetype) then return end
+
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
     return {
       timeout_ms = 500,
