@@ -8,6 +8,7 @@ require('nvim-treesitter.configs').setup({
     'diff',
     'dockerfile',
     'fsharp',
+    'gleam',
     'go',
     'gomod',
     'gosum',

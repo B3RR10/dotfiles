@@ -3,6 +3,7 @@ vim.lsp.enable({
   'bashls',
   'docker_compose_language_service',
   'dockerls',
+  'gleam',
   'helm_ls',
   'lua_ls',
   'nixd',
