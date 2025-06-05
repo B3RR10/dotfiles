@@ -45,7 +45,7 @@ local later = function(opts) MiniDeps.later(load(opts)) end
 
 now({ require = { 'options', 'keymaps' } })
 
-now({ add = 'rebelot/kanagawa.nvim', require = 'plugins.kanagawa' })
+now({ add = 'webhooked/kanso.nvim', require = 'plugins.colorscheme' })
 now({ add = 'Bekaboo/dropbar.nvim' })
 
 now({ add = 'tpope/vim-fugitive' })
